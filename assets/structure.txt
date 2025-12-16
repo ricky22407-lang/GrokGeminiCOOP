@@ -1,0 +1,4 @@
+assets/
+├── stand_images/      # Character Standing Arts
+├── cg_images/         # Event CGs
+└── backgrounds/       # Scenery
