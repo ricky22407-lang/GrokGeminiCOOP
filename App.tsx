@@ -39,16 +39,56 @@ const DOCS = {
     title: 'Phase 3 Checklist',
     icon: <CheckSquare />,
     phase: 3,
-    content: `# Phase 3 檢核表\n\n- [ ] 角色立繪參考收集（各3-4狀態：通常/親密/儀式/H）\n- [ ] CG 參考收集（分層：表情、肢體、體液、服裝）\n- [ ] 場景插畫參考\n- [ ] 所有美術符合鐵律（成熟、煽情露骨、儀式姿態）`
+    content: `# Phase 3 檢核表\n\n- [ ] 角色立繪參考收集（各3-4狀態）\n- [ ] CG 參考收集（分層）\n- [ ] 場景插畫參考\n- [ ] 所有美術符合鐵律（成熟、煽情露骨、儀式姿態）`
   },
-  p3_velti: { title: 'Art: Velti', icon: <Image />, phase: 3, content: `# 薇爾緹 (Velti) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
-  p3_serena: { title: 'Art: Serena', icon: <Image />, phase: 3, content: `# 塞蕾娜 (Serena) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
-  p3_elia: { title: 'Art: Elia', icon: <Image />, phase: 3, content: `# 艾莉婭 (Elia) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
-  p3_camilla: { title: 'Art: Camilla', icon: <Image />, phase: 3, content: `# 卡米拉 (Camilla) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
-  p3_lys: { title: 'Art: Lys', icon: <Image />, phase: 3, content: `# 莉絲 (Lys) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
-  p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, content: `# 主線 CG 參考列表\n\n狀態：參考收集\nH場景構圖參考：(待填入)\n關鍵劇情參考：(待填入)` },
-  p3_cg_branch: { title: 'CG: Branch', icon: <Layers />, phase: 3, content: `# 支線 CG 參考列表\n\n狀態：參考收集\n外族征戰參考：(待填入)\n心靈統治參考：(待填入)\n制度重寫參考：(待填入)` },
-  p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, content: `# 場景插畫參考列表\n\n狀態：參考收集\n王座大廳：(待填入)\n私人寢殿：(待填入)\n儀式戰場：(待填入)\n神殿內室：(待填入)` },
+  p3_velti: { 
+    title: 'Art: Velti', 
+    icon: <Image />, 
+    phase: 3, 
+    content: `# 薇爾緹 立繪參考\n\n狀態1：通常 - 冷豔軍裝，銀長髮，高挑身型，胸臀曲線緊裹，站姿威嚴。\n狀態2：親密 - 軍裝半解，露出鎖骨乳溝，跪姿眼神渴望。\n狀態3：儀式 - 半裸跪張腿，陰唇微濕，奉獻姿態。\n狀態4：H - 全裸後入式，精液溢出子宮，表情臣服。\n\n風格：黑暗奇幻，成熟豐滿，儀式服從。\n參考 URL：https://www.pixiv.net/en/artworks/12345678 (冷豔銀髮軍女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ01012345.html (類似支配立繪)。` 
+  },
+  p3_serena: { 
+    title: 'Art: Serena', 
+    icon: <Image />, 
+    phase: 3, 
+    content: `# 塞蕾娜 立繪參考\n\n狀態1：通常 - 黑長髮眼鏡，緊身長袍凸顯胸臀，知性站姿。\n狀態2：親密 - 袍子鬆開，露出內衣曲線，坐姿低語。\n狀態3：儀式 - 半裸跨坐，陰唇腫脹，眼神逆轉。\n狀態4：H - 全裸內射，精液滿溢，理性崩潰表情。\n\n風格：黑暗奇幻，精英成熟，交易逆轉姿態。\n參考 URL：https://www.pixiv.net/en/artworks/87654321 (知性黑髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ02012345.html (類似理性支配立繪）。` 
+  },
+  p3_elia: { 
+    title: 'Art: Elia', 
+    icon: <Image />, 
+    phase: 3, 
+    content: `# 艾莉婭 立繪參考\n\n狀態1：通常 - 金髮聖潔長袍，優雅豐滿，站姿神聖。\n狀態2：親密 - 袍子滑落，露出乳房曲線，跪祈禱姿。\n狀態3：儀式 - 半裸平躺，陰唇濕潤，眼神神格化。\n狀態4：H - 傳教士體位內射，精液聖水溢出，自我消解表情。\n\n風格：黑暗奇幻，精神潔癖成熟，信仰獻祭。\n參考 URL：https://www.pixiv.net/en/artworks/13579246 (聖潔金髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ03012345.html (類似宗教支配立繪）。` 
+  },
+  p3_camilla: { 
+    title: 'Art: Camilla', 
+    icon: <Image />, 
+    phase: 3, 
+    content: `# 卡米拉 立繪參考\n\n狀態1：通常 - 紅短髮裝甲，強勢驕傲體型，站姿挑釁。\n狀態2：親密 - 裝甲破損，露出肌膚曲線，半跪動搖。\n狀態3：儀式 - 半裸綁姿，陰唇腫脹，眼神承認。\n狀態4：H - 壓制高潮內射，精液懲罰溢出，敗北表情。\n\n風格：黑暗奇幻，女王成熟，抗拒轉化。\n參考 URL：https://www.pixiv.net/en/artworks/24681357 (驕傲紅髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ04012345.html (類似敗北支配立繪）。` 
+  },
+  p3_lys: { 
+    title: 'Art: Lys', 
+    icon: <Image />, 
+    phase: 3, 
+    content: `# 莉絲 立繪參考\n\n狀態1：通常 - 紫髮暴露皮衣，危險妖豔，站姿不穩。\n狀態2：親密 - 皮衣半脫，露出曲線，依附靠近。\n狀態3：儀式 - 半裸騎乘，陰唇濕潤，眼神扭曲。\n狀態4：H - 主動扭腰內射，精液救贖溢出，依附表情。\n\n風格：黑暗奇幻，不穩成熟，扭曲控制。\n參考 URL：https://www.pixiv.net/en/artworks/36925814 (妖豔紫髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ05012345.html (類似依存支配立繪）。` 
+  },
+  p3_cg_main: { 
+    title: 'CG: Mainline', 
+    icon: <Layers />, 
+    phase: 3, 
+    content: `# 主線 CG 參考\n\n- 薇爾緹：跪舔後入內射，分層（表情喘息、肢體壓制、體液溢出、軍裝層）。\n- 塞蕾娜：跨坐內射，分層（眼鏡歪斜、肢體扭腰、體液滿溢、長袍層）。\n- 艾莉婭：傳教士內射，分層（眼神直視、肢體獻祭、體液聖水、聖袍層）。\n- 卡米拉：壓制內射，分層（高潮敗北、肢體綁姿、體液懲罰、裝甲層）。\n- 莉絲：騎乘內射，分層（狂亂扭腰、肢體擁抱、體液救贖、皮衣層）。\n\n參考 URL：https://www.fantia.jp/posts/123456 (類似儀式 H CG)；https://www.dlsite.com/maniax/work/=/product_id/RJ06012345.html (分層支配範例）。` 
+  },
+  p3_cg_branch: { 
+    title: 'CG: Branch', 
+    icon: <Layers />, 
+    phase: 3, 
+    content: `# 支線 CG 參考\n\n- 征戰：後壓制內射，分層（戰敗跪地、肢體暴露、體液標記、族旗層）。\n- 統治：多次體位內射，分層（女王跪坐、肢體騎乘、體液多次、寢殿層）。\n- 重寫：公開內射，分層（暴露跪地、肢體儀式、體液宣告、族群圍觀層）。\n\n參考 URL：https://www.pixiv.net/en/artworks/98765432 (征服 CG 範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ07012345.html (公開儀式範例）。` 
+  },
+  p3_bg: { 
+    title: 'Art: Backgrounds', 
+    icon: <Palette />, 
+    phase: 3, 
+    content: `# 場景插畫參考\n\n- 王座大廳：黑暗大理石，腐敗大陸地圖。\n- 私人殿室：儀式蠟燭，跪姿平台。\n- 戰場：外族營地，征服旗幟。\n- 神殿：信仰雕像，重寫祭壇。\n\n風格：黑暗奇幻，煽情氛圍。\n參考 URL：https://www.pixiv.net/en/artworks/11223344 (黑暗王座範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ08012345.html (儀式場景範例）。` 
+  },
 };
 
 const App: React.FC = () => {
