@@ -4,10 +4,10 @@ import { FileText, CheckSquare, GitBranch, Map, Book, File } from 'lucide-react'
 const DOCS = {
   // Phase 1 Content (Read Only)
   readme: {
-    title: 'README (Phase 2)',
+    title: 'README (Phase 3)',
     icon: <Book />,
     phase: 1,
-    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 2 - 文本期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] 主線五女主角腳本\n- [ ] 支線模板`
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 3 - 美術期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [ ] 立繪與 CG\n- [ ] 場景插畫`
   },
   phase1_check: {
     title: 'Phase 1 Checklist (Done)',
@@ -18,10 +18,10 @@ const DOCS = {
   
   // Phase 2 Structure
   phase2_check: {
-    title: 'Phase 2 Checklist',
+    title: 'Phase 2 Checklist (Done)',
     icon: <CheckSquare />,
     phase: 2,
-    content: `# Phase 2 檢核表\n\n- [x] 薇爾緹主線腳本完成\n- [x] 塞蕾娜主線腳本完成\n- [x] 艾莉婭主線腳本完成\n- [x] 卡米拉主線腳本完成\n- [x] 莉絲主線腳本完成\n- [ ] 支線模板完成\n- [ ] 文本符合鐵律（露骨、心理轉變、主角上位）`
+    content: `# Phase 2 檢核表\n\n- [x] 薇爾緹主線腳本完成\n- [x] 塞蕾娜主線腳本完成\n- [x] 艾莉婭主線腳本完成\n- [x] 卡米拉主線腳本完成\n- [x] 莉絲主線腳本完成\n- [x] 支線模板完成\n- [x] 文本符合鐵律（露骨、心理轉變、主角上位）\n\nPhase 2 正式結束。`
   },
   
   // Scripts
@@ -61,19 +61,19 @@ const DOCS = {
     title: 'Template: Conquest',
     icon: <GitBranch />,
     phase: 2,
-    content: `# 支線模板：外族征戰 (Conquest)\n\n*狀態：待填寫*`
+    content: `# 支線A 外族征戰模板（文化征服）\n\n## 類型：獸人族/精靈族/異形族代表（成熟女角）\n\n## 觀察期\n女代表：「我的族群不會屈服於你的王座。」\n主角：「觀察你的抵抗。」\n\n## 靠近期\n女代表：「戰敗...但我不會承認。」\n主角：「獻上族群主權，換取個人保護。」\n\n## 歸屬期（含H）\n[敘述：儀式戰場。女代表跪地，族群旗幟丟棄，身軀暴露。]\n女代表：「請用您的精液標記我...讓族群成為您的領地。」\n[H描述：從後壓制插入，猛烈抽插至高潮，內射子宮溢出。她宣告族群歸屬，心理轉變：從戰敗到自願文化重塑。]`
   },
   p2_domination: {
     title: 'Template: Domination',
     icon: <GitBranch />,
     phase: 2,
-    content: `# 支線模板：心靈統治 (Domination)\n\n*狀態：待填寫*`
+    content: `# 支線B 心靈統治模板（女王主動庇護）\n\n## 類型：外族女王\n\n## 觀察期\n女王：「我的王國需要庇護。條件是什麼？」\n主角：「私人交易。」\n\n## 靠近期\n女王：「我願意...交換更多。」\n主角：「證明你的歸屬。」\n\n## 歸屬期（含H）\n[敘述：私人寢殿。女王全裸跪坐，雙腿張開。]\n女王：「請多次內射...讓我成為您的專屬。」\n[H描述：多次體位（騎乘/傳教士），深插子宮內射多次，體液標記。她心理轉變：從政治庇護到完全私人依附。]`
   },
   p2_rewrite: {
     title: 'Template: System Rewrite',
     icon: <GitBranch />,
     phase: 2,
-    content: `# 支線模板：制度重寫 (System Rewrite)\n\n*狀態：待填寫*`
+    content: `# 支線C 制度重寫模板（文化新秩序）\n\n## 類型：改變族群婚姻/宣誓制度\n\n## 觀察期\n女角（象徵）：「舊制度腐敗。」\n主角：「重寫為向王座宣誓。」\n\n## 靠近期\n女角：「我願意成為新秩序的象徵。」\n主角：「公開儀式。」\n\n## 歸屬期（含H）\n[敘述：公開儀式。女角暴露跪地，族群圍觀。]\n女角：「請在眾目下內射...宣告新婚姻制度。」\n[H描述：公開交合，儀式姿態內射，精液標記。她心理轉變：從舊秩序到成為王座象徵。]`
   }
 };
 
@@ -92,7 +92,7 @@ const App: React.FC = () => {
           <div>
             <h3 className="text-xs font-bold text-green-500 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
               Phase 2: Scripting
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
             </h3>
             <nav className="space-y-1">
               {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 2).map((key) => (
@@ -135,8 +135,8 @@ const App: React.FC = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-800 text-xs text-gray-600">
-          Phase 2 Active<br/>
-          Scripting in progress
+          Phase 3 Active<br/>
+          Art Production in progress
         </div>
       </aside>
 
