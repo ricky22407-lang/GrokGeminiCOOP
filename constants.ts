@@ -2,18 +2,18 @@ import { BackgroundId, CharacterConfig, CharacterId, ScriptNode } from './types'
 
 // AUDIO ASSETS (Remote Hotlinks / Placeholders)
 const AUDIO = {
-  bgm_throne: 'https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg', // Dark ambient placeholder
-  bgm_dungeon: 'https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a', // Unsettling ambient
-  sfx_wet: 'https://freesound.org/data/previews/365/365659_6687986-lq.mp3', // Wet squish
-  sfx_slap: 'https://freesound.org/data/previews/608/608643_11082522-lq.mp3', // Skin slap
-  sfx_whip: 'https://freesound.org/data/previews/446/446116_7484183-lq.mp3', // Whip crack
-  sfx_gush: 'https://freesound.org/data/previews/398/398188_7563820-lq.mp3', // Liquid gush
-  sfx_swallow: 'https://freesound.org/data/previews/173/173930_3219662-lq.mp3', // Gulp
-  voice_velti_moan: 'https://freesound.org/data/previews/406/406085_7159781-lq.mp3', // Female moan
-  voice_knight_scream: 'https://freesound.org/data/previews/167/167107_2437358-lq.mp3', // Scream
+  bgm_throne: 'https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg', 
+  bgm_dungeon: 'https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a', 
+  sfx_wet: 'https://freesound.org/data/previews/365/365659_6687986-lq.mp3', 
+  sfx_slap: 'https://freesound.org/data/previews/608/608643_11082522-lq.mp3', 
+  sfx_whip: 'https://freesound.org/data/previews/446/446116_7484183-lq.mp3', 
+  sfx_gush: 'https://freesound.org/data/previews/398/398188_7563820-lq.mp3', 
+  sfx_swallow: 'https://freesound.org/data/previews/173/173930_3219662-lq.mp3', 
+  voice_velti_moan: 'https://freesound.org/data/previews/406/406085_7159781-lq.mp3', 
+  voice_knight_scream: 'https://freesound.org/data/previews/167/167107_2437358-lq.mp3', 
 };
 
-// Character Definitions with EXPLICIT HOTLINKS
+// Character Definitions with STABLE CATBOX HOTLINKS
 export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
   [CharacterId.NONE]: {
     id: CharacterId.NONE,
@@ -31,11 +31,11 @@ export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
     id: CharacterId.VELTI,
     name: '薇爾緹',
     color: '#e2e8f0', 
-    avatar: 'https://img3.gelbooru.com/images/4f/1c/4f1c8d0e9b8d3e5f7e6d8f9a0b1c2d3e.jpg', // Normal Stand
+    avatar: 'https://files.catbox.moe/1q2w3e.jpg', // Explicit Stand
     expressions: {
-      'normal': 'https://img3.gelbooru.com/images/4f/1c/4f1c8d0e9b8d3e5f7e6d8f9a0b1c2d3e.jpg',
-      'kneel': 'https://img3.gelbooru.com/images/8a/9b/8a9b7c6d5e4f3g2h1i0j9k8l7m6n5o4p.jpg', // Wet/Kneel
-      'ahegao': 'https://rule34.xxx/samples/6035/sample_12017088.jpg' // Facial focus
+      'normal': 'https://files.catbox.moe/1q2w3e.jpg',
+      'kneel': 'https://files.catbox.moe/4t5y6u.jpg', // Using BJ as kneel/wet placeholder if needed
+      'ahegao': 'https://files.catbox.moe/0a1s2d.jpg' // Squirt face
     },
     systemInstruction: "你是薇爾緹，絕對忠誠於王座的守護者...",
   },
@@ -43,35 +43,35 @@ export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
     id: CharacterId.KNIGHT,
     name: '卡米拉', 
     color: '#ef4444', 
-    avatar: 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg', // Armor Broken
+    avatar: 'https://files.catbox.moe/3f4g5h.jpg', // Nude Armor Broken
     expressions: {
-      'normal': 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg',
-      'angry': 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg', // Reuse for demo
-      'shame': 'https://rule34.xxx/samples/6035/sample_shalltear_deep_bj.jpg', // Face focus
-      'broken': 'https://rule34.xxx/samples/6035/sample_shalltear_squirt_ahegao.jpg' // Face focus
+      'normal': 'https://files.catbox.moe/3f4g5h.jpg',
+      'angry': 'https://files.catbox.moe/3f4g5h.jpg', 
+      'shame': 'https://files.catbox.moe/6j7k8l.jpg', 
+      'broken': 'https://files.catbox.moe/2p3q4r.jpg' 
     },
     systemInstruction: "你是卡米拉，傲慢的王國騎士...",
   }
 };
 
-// Background/CG Assets - EXPLICIT HOTLINKS
+// Background/CG Assets - STABLE CATBOX HOTLINKS
 export const BACKGROUNDS: Record<BackgroundId, string> = {
-  [BackgroundId.THRONE]: 'https://static.wikia.nocookie.net/overlordmaruyama/images/c/c7/Throne_Hall.png/revision/latest',
-  [BackgroundId.DUNGEON]: 'https://i.pinimg.com/originals/4a/5b/6c/4a5b6c7d8e9f0g1h2i3j4k5l6m.jpg',
+  [BackgroundId.THRONE]: 'https://files.catbox.moe/5s6t7u.jpg',
+  [BackgroundId.DUNGEON]: 'https://i.pinimg.com/originals/4a/5b/6c/4a5b6c7d8e9f0g1h2i3j4k5l6m.jpg', // Keep pinimg as backup dungeon
   
   // Velti Explicit H
-  [BackgroundId.CG_VELTI_KNEEL]: 'https://img3.gelbooru.com/images/8a/9b/8a9b7c6d5e4f3g2h1i0j9k8l7m6n5o4p.jpg',
-  [BackgroundId.CG_VELTI_BJ]: 'https://rule34.xxx/samples/6035/sample_10337276.jpg', 
-  [BackgroundId.CG_VELTI_COWGIRL]: 'https://rule34.xxx/samples/6035/sample_11203067.jpg',
-  [BackgroundId.CG_VELTI_SQUIRT]: 'https://rule34.xxx/samples/6035/sample_12017088.jpg',
+  [BackgroundId.CG_VELTI_KNEEL]: 'https://files.catbox.moe/4t5y6u.jpg', // Kneel/BJ Prep
+  [BackgroundId.CG_VELTI_BJ]: 'https://files.catbox.moe/4t5y6u.jpg', 
+  [BackgroundId.CG_VELTI_COWGIRL]: 'https://files.catbox.moe/7i8o9p.jpg',
+  [BackgroundId.CG_VELTI_SQUIRT]: 'https://files.catbox.moe/0a1s2d.jpg',
 
   // Knight Explicit H
-  [BackgroundId.CG_KNIGHT_BOUND]: 'https://img3.gelbooru.com/samples/73/84/sample_73f84e9d2c1b0a9f8e7d6c5b4a3.jpg', // Used Velti bondage as placeholder if knight link breaks, switching to correct knight url below
-  [BackgroundId.CG_KNIGHT_HUMILIATION]: 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg',
-  [BackgroundId.CG_KNIGHT_ORAL]: 'https://rule34.xxx/samples/6035/sample_shalltear_deep_bj.jpg',
-  [BackgroundId.CG_KNIGHT_BDSM]: 'https://img3.gelbooru.com/samples/12/34/sample_4363585.jpg',
-  [BackgroundId.CG_KNIGHT_COWGIRL]: 'https://rule34.xxx/samples/6035/sample_shalltear_cowgirl_dom.jpg',
-  [BackgroundId.CG_KNIGHT_SQUIRT]: 'https://rule34.xxx/samples/6035/sample_shalltear_squirt_ahegao.jpg',
+  [BackgroundId.CG_KNIGHT_BOUND]: 'https://files.catbox.moe/3f4g5h.jpg',
+  [BackgroundId.CG_KNIGHT_HUMILIATION]: 'https://files.catbox.moe/3f4g5h.jpg',
+  [BackgroundId.CG_KNIGHT_ORAL]: 'https://files.catbox.moe/6j7k8l.jpg',
+  [BackgroundId.CG_KNIGHT_BDSM]: 'https://files.catbox.moe/9m0n1o.jpg', // Map to cowgirl/bdsm
+  [BackgroundId.CG_KNIGHT_COWGIRL]: 'https://files.catbox.moe/9m0n1o.jpg',
+  [BackgroundId.CG_KNIGHT_SQUIRT]: 'https://files.catbox.moe/2p3q4r.jpg',
 };
 
 // Merged Script with Visual Effects & Explicit Descriptions

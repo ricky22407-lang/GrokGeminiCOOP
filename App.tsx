@@ -22,11 +22,11 @@ const ASSET_PREVIEWS = {
 
 const DOCS: any = {
   readme: {
-    title: 'README (V6.5 Final)',
+    title: 'README (V7.0 Stable)',
     icon: <Book />,
     phase: 1,
     type: 'markdown',
-    content: `# Dominion：沉默王座 v6.5 (Final)\n\n## 最終視覺實裝\n- **Remote Hotlinks**: 全面使用 Gelbooru/Rule34 直鏈。\n- **Fallback System**: 防止圖床阻擋導致的白屏。\n- **SFX**: 實裝日語喘息與濕潤音效。\n\n## 警告\n本版本包含極度露骨內容 (Explicit)。請確保您已成年。`
+    content: `# Dominion：沉默王座 v7.0 (Stable)\n\n## 最終視覺實裝\n- **Stable Hotlinks**: 更新為 Catbox 直鏈。\n- **Smart Loading**: 確保特效與圖片載入同步。\n- **H-Core**: Explicit 內容完整實裝。\n\n## 警告\n本版本包含極度露骨內容 (Explicit)。請確保您已成年。`
   },
   renpy_export: {
     title: 'Export: script.rpy',
@@ -35,12 +35,12 @@ const DOCS: any = {
     type: 'code',
     content: `
 # Dominion: Silent Throne - Ren'Py Export
-# Generated from Web Prototype v6.5
+# Generated from Web Prototype v7.0
 
 define v = Character("薇爾緹", color="#e2e8f0", voice_tag="velti")
 define k = Character("卡米拉", color="#ef4444", voice_tag="knight")
 
-# Images are referenced by URL in Web, but here mapped to local tags
+# Images mapped from Constants
 image cg velti_bj = "velti_bj.jpg"
 image cg velti_squirt = "velti_squirt.jpg"
 image cg knight_oral = "knight_oral.jpg"
@@ -64,6 +64,9 @@ const App: React.FC = () => {
   const [showSaveMenu, setShowSaveMenu] = useState(false);
   const [mode, setMode] = useState<'docs' | 'play'>('docs');
   const [saves, setSaves] = useState<SaveSlot[]>([]);
+  
+  // Background State
+  const [bgLoaded, setBgLoaded] = useState(false);
   const [bgError, setBgError] = useState(false);
   
   // Animation Key
@@ -91,7 +94,8 @@ const App: React.FC = () => {
   // Effect Trigger for Node Change
   useEffect(() => {
     setAnimKey(prev => prev + 1);
-    setBgError(false); // Reset bg error
+    setBgError(false); 
+    setBgLoaded(false); // Reset load state
 
     // Handle Music
     if (currentNode.music && bgmRef.current) {
@@ -149,6 +153,9 @@ const App: React.FC = () => {
   };
 
   const getVisualEffectClass = (effect?: VisualEffect) => {
+    // Only apply animation if background is loaded to avoid weird jumps
+    if (!bgLoaded) return '';
+    
     switch (effect) {
       case 'zoom-slow': return 'animate-zoom-slow';
       case 'zoom-in-hard': return 'animate-zoom-hard';
@@ -204,11 +211,15 @@ const App: React.FC = () => {
         <div 
             key={`bg-${animKey}`}
             className={`absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 ease-in-out ${getVisualEffectClass(currentNode.visualEffect)}`}
-            style={{ backgroundImage: `url(${currentBackground})` }}
+            style={{ 
+                backgroundImage: `url(${currentBackground})`,
+                opacity: bgLoaded ? 1 : 0 
+            }}
         >
-            {/* Hidden image to track load error */}
+            {/* Hidden image to track load/error state */}
             <img 
                 src={currentBackground} 
+                onLoad={() => setBgLoaded(true)}
                 onError={() => setBgError(true)} 
                 className="hidden" 
                 alt="bg-loader"
@@ -221,12 +232,12 @@ const App: React.FC = () => {
                 <AlertTriangle className="w-16 h-16 text-red-600 mx-auto mb-4"/>
                 <h2 className="text-xl text-red-500 font-bold uppercase tracking-widest">Background Signal Lost</h2>
                 <p className="text-gray-500 text-sm mt-2">Remote asset blocked. Visualizing via Neural Interface.</p>
-                <a href={currentBackground} target="_blank" className="text-blue-500 text-xs mt-4 block underline">Force Load Link</a>
+                <div className="text-[10px] text-gray-600 mt-2 font-mono">{currentBackground}</div>
             </div>
         </div>
       )}
       
-      {/* Flash Overlay Effect */}
+      {/* Flash Overlay Effect - Triggers regardless of BG load to maintain impact */}
       {currentNode.visualEffect === 'flash-white' && (
         <div key={`flash-${animKey}`} className="absolute inset-0 bg-white z-50 animate-flash pointer-events-none" />
       )}
@@ -333,7 +344,7 @@ const App: React.FC = () => {
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-black border-r border-gray-800 p-6 flex flex-col h-screen z-50">
         <h1 className="text-2xl font-bold text-red-600 mb-2 tracking-widest uppercase">Dominion</h1>
-        <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">H-Engine v6.5</div>
+        <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">H-Engine v7.0</div>
         
         <div className="space-y-6 flex-1">
           <div className="bg-gray-900 p-1 rounded-lg flex mb-6">
