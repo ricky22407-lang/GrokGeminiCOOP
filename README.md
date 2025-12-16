@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Dominion：沉默王座
 
-# Run and deploy your AI Studio app
+18+ 黑暗奇幻 Galgame  
+核心賣點：你不是拯救世界，而是讓世界主跪下。
 
-This contains everything you need to run your app locally.
+## 核心鐵律（不可違反）
+1. 風格參考 Overlord：主角必須是絕對的強者，帶有冷酷的魅力。
+2. H 場景必須服務角色心理轉變：性是征服的一環，體現權力的流動。
+3. 所有女性角色成年、無蘿莉：專注於成熟心智的崩潰與重塑。
+4. 主角永遠為上位者，不被攻略：玩家掌控主導權，不接受反向馴服。
+5. 配音、立繪、文本情緒一致：沈浸感優先。
+6. 無血腥：暴力僅限於心理與支配層面，不涉及獵奇。
+7. 文本與素材必須足夠煽情露骨：不迴避成人內容的核心吸引力。
 
-View your app in AI Studio: https://ai.studio/apps/drive/1gU4XqvRwiK-pAIWqLuR-sY-1u7Y3Fkut
+## 當前階段
+Phase 1 - 企劃期（進行中）
 
-## Run Locally
+## 進度
+- [x] 世界觀文檔 (docs/world_setting.md)
+- [x] 角色設定表 (docs/character_settings.md)
+- [x] 故事流程圖 (docs/story_flowchart.md)
+- [x] Phase 1 檢核表 (docs/phase1_checklist.md)
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 開發筆記
+本儲存庫目前處於文檔建置模式。Web 預覽器已配置為顯示上述設計文檔。

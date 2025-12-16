@@ -1,193 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { BACKGROUNDS, CHARACTERS, INITIAL_SCRIPT } from './constants';
-import { BackgroundId, CharacterId, GameState } from './types';
-import { DialogueBox } from './components/DialogueBox';
-import { CharacterSprite } from './components/CharacterSprite';
-import { Button } from './components/ui/Button';
-import { AiChatOverlay } from './components/AiChatOverlay';
-import { Settings, Play, Save, RefreshCw } from 'lucide-react';
+import React, { useState } from 'react';
+import { FileText, CheckSquare, GitBranch, Map, Book } from 'lucide-react';
+
+// Hardcoded content for preview purposes since we can't fs.read in browser easily without setup
+// In a real app, this would parse the MD files.
+const DOCS = {
+  readme: {
+    title: 'README',
+    icon: <Book />,
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n核心賣點：你不是拯救世界，而是讓世界主跪下。\n\n## 核心鐵律\n1. 風格參考 Overlord\n2. H 場景必須服務角色心理轉變\n3. 所有女性角色成年、無蘿莉\n4. 主角永遠為上位者\n5. 無血腥，只有支配\n\n## 當前階段: Phase 1 (企劃)`
+  },
+  world: {
+    title: 'World Setting',
+    icon: <Map />,
+    content: `# 世界觀：艾瑞西亞\n\n- **聖光都城**: 虛偽的信仰中心\n- **永恆尖塔**: 主角的魔王城\n- **精靈之森**: 傲慢的古老種族\n\n核心力量：支配值 (Dominance) vs 意志力 (Willpower)`
+  },
+  char: {
+    title: 'Characters',
+    icon: <FileText />,
+    content: `# 角色設定\n\n1. **塞拉斯蒂亞 (聖女)**: 墮落/背德\n2. **艾琳諾 (精靈女王)**: 傲慢粉碎\n3. **瓦爾基里 (女將軍)**: 雌犬化\n4. **薇薇安 (法師)**: 知識換身體\n5. **娜蒂亞 (刺客)**: 依賴/所有物化`
+  },
+  flow: {
+    title: 'Story Flow',
+    icon: <GitBranch />,
+    content: `# 故事流程\n\n序章 -> 實力檢測 -> 路線選擇 (教會/王國/森林) -> H事件/調教 -> 結局分支\n\n最終結局: 絕對支配 (True End)`
+  },
+  check: {
+    title: 'Checklist',
+    icon: <CheckSquare />,
+    content: `# Phase 1 Checklist\n\n[x] World Setting\n[x] Character Profiles\n[x] Story Flowchart\n[x] README Setup\n\nReady for Phase 2: Prototype`
+  }
+};
 
 const App: React.FC = () => {
-  // Application State
-  const [started, setStarted] = useState(false);
-  
-  // Game State
-  const [gameState, setGameState] = useState<GameState>({
-    currentSceneId: 'start',
-    history: [],
-    flags: {},
-    isAiChatActive: false,
-    aiChatHistory: []
-  });
+  const [activeTab, setActiveTab] = useState<keyof typeof DOCS>('readme');
 
-  // Derived State
-  const currentScene = INITIAL_SCRIPT[gameState.currentSceneId];
-  const currentCharacter = currentScene ? CHARACTERS[currentScene.characterId] : null;
-  const currentBg = currentScene && currentScene.backgroundId ? BACKGROUNDS[currentScene.backgroundId] : null;
-  
-  // Persistent Background Logic (Keep last background if not defined in current scene)
-  const [activeBg, setActiveBg] = useState<string>(BACKGROUNDS[BackgroundId.CLASSROOM]);
-
-  useEffect(() => {
-    if (currentScene?.backgroundId) {
-      setActiveBg(BACKGROUNDS[currentScene.backgroundId]);
-    }
-  }, [currentScene]);
-
-  // Actions
-  const handleStart = () => {
-    setStarted(true);
-    setGameState(prev => ({ ...prev, currentSceneId: 'start' }));
-  };
-
-  const handleNext = () => {
-    if (!currentScene) return;
-
-    // Handle Linear Progression
-    if (currentScene.nextId && !currentScene.choices) {
-      // Check for Special AI Mode Trigger
-      const nextScene = INITIAL_SCRIPT[currentScene.nextId];
-      if (nextScene?.isAiMode) {
-        setGameState(prev => ({ ...prev, isAiChatActive: true, currentSceneId: currentScene.nextId! }));
-        return;
-      }
-
-      setGameState(prev => ({
-        ...prev,
-        history: [...prev.history, prev.currentSceneId],
-        currentSceneId: currentScene.nextId!
-      }));
-    }
-  };
-
-  const handleChoice = (nextId: string) => {
-    const nextScene = INITIAL_SCRIPT[nextId];
-    if (nextScene?.isAiMode) {
-       setGameState(prev => ({ ...prev, isAiChatActive: true }));
-       // We might not advance the scene ID immediately if we want to stay in "choice context", 
-       // but for this engine, let's treat AI mode as an overlay state.
-       return;
-    }
-
-    setGameState(prev => ({
-      ...prev,
-      history: [...prev.history, prev.currentSceneId],
-      currentSceneId: nextId
-    }));
-  };
-
-  const closeAiChat = () => {
-    setGameState(prev => ({ ...prev, isAiChatActive: false }));
-    // Ideally jump to a post-chat scene, but for demo we stay
-  };
-
-  // --- RENDERING ---
-
-  // Main Menu
-  if (!started) {
-    return (
-      <div className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center z-0 scale-105 animate-pulse"
-          style={{ backgroundImage: `url(${BACKGROUNDS[BackgroundId.ROOFTOP]})`, filter: 'blur(4px) brightness(0.6)' }}
-        />
+  return (
+    <div className="min-h-screen bg-gray-900 text-gray-100 font-sans flex flex-col md:flex-row">
+      {/* Sidebar */}
+      <aside className="w-full md:w-64 bg-black border-r border-gray-800 p-6 flex flex-col">
+        <h1 className="text-2xl font-bold text-red-600 mb-2 tracking-widest uppercase">Dominion</h1>
+        <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">Project Documentation</div>
         
-        <div className="z-10 text-center space-y-8 p-10 bg-black/40 backdrop-blur-sm rounded-xl border border-white/10 shadow-2xl">
-          <h1 className="text-6xl md:text-8xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-vn-accent to-purple-400 drop-shadow-lg tracking-tight">
-            AETHELGARD
-          </h1>
-          <p className="text-xl text-gray-300 font-sans tracking-[0.2em] uppercase">Visual Novel Engine Preview</p>
-          
-          <div className="flex flex-col gap-4 w-64 mx-auto pt-8">
-            <Button onClick={handleStart} className="w-full py-4 text-lg">
-              <Play className="inline-block mr-2 w-4 h-4" /> Start Game
-            </Button>
-            <Button variant="secondary" className="w-full">
-              <Save className="inline-block mr-2 w-4 h-4" /> Load Game
-            </Button>
-            <Button variant="ghost" className="w-full">
-              <Settings className="inline-block mr-2 w-4 h-4" /> Settings
-            </Button>
+        <nav className="space-y-2">
+          {(Object.keys(DOCS) as Array<keyof typeof DOCS>).map((key) => (
+            <button
+              key={key}
+              onClick={() => setActiveTab(key)}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded text-sm transition-all ${
+                activeTab === key 
+                  ? 'bg-red-900/20 text-red-400 border border-red-900/50' 
+                  : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+              }`}
+            >
+              {React.cloneElement(DOCS[key].icon as React.ReactElement<any>, { size: 16 })}
+              {DOCS[key].title}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-auto pt-8 text-xs text-gray-600">
+          Phase 1: Planning<br/>
+          Status: <span className="text-green-500">Active</span>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-8 md:p-12 overflow-y-auto">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 shadow-2xl">
+            <pre className="font-mono whitespace-pre-wrap text-gray-300 leading-relaxed">
+              {DOCS[activeTab].content}
+            </pre>
           </div>
         </div>
-        
-        <div className="absolute bottom-4 text-gray-500 text-xs">
-          Engine Version 0.1.0 | React + Tailwind + Gemini
-        </div>
-      </div>
-    );
-  }
-
-  // Gameplay Screen
-  return (
-    <div className="relative w-full h-screen overflow-hidden bg-black select-none">
-      
-      {/* 1. Background Layer */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out z-0"
-        style={{ backgroundImage: `url(${activeBg})` }}
-      />
-      <div className="absolute inset-0 bg-black/20 z-0" /> {/* Dimmer */}
-
-      {/* 2. Character Layer */}
-      <div className="absolute inset-0 z-10">
-        <CharacterSprite 
-          character={currentCharacter} 
-          expression={currentScene?.characterExpression} 
-        />
-      </div>
-
-      {/* 3. UI Layer (Dialogue & Choices) */}
-      {!gameState.isAiChatActive && (
-        <>
-          {/* Choices Overlay */}
-          {currentScene?.choices ? (
-            <div className="absolute inset-0 z-30 bg-black/60 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-              <div className="flex flex-col gap-4 w-full max-w-lg p-4">
-                {currentScene.choices.map((choice, idx) => (
-                  <Button 
-                    key={idx} 
-                    onClick={() => handleChoice(choice.nextId)}
-                    className="w-full py-6 text-xl text-left pl-8 hover:translate-x-2 transition-transform"
-                  >
-                    <span className="text-vn-accent mr-4">▶</span> {choice.text}
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            /* Dialogue Box */
-            <DialogueBox 
-              character={currentCharacter}
-              text={currentScene?.text || "..."}
-              onNext={handleNext}
-            />
-          )}
-        </>
-      )}
-
-      {/* 4. AI Chat Overlay */}
-      {gameState.isAiChatActive && currentCharacter && (
-        <AiChatOverlay 
-          character={currentCharacter}
-          onClose={closeAiChat}
-        />
-      )}
-
-      {/* 5. System UI (Top Right) */}
-      <div className="absolute top-4 right-4 z-40 flex gap-2">
-        <Button variant="secondary" className="px-3 py-1 text-xs" onClick={() => setStarted(false)}>
-          MENU
-        </Button>
-        <Button variant="secondary" className="px-3 py-1 text-xs">
-          AUTO
-        </Button>
-        <Button variant="secondary" className="px-3 py-1 text-xs">
-          LOG
-        </Button>
-      </div>
-
+      </main>
     </div>
   );
 };
