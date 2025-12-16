@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen } from 'lucide-react';
+import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen, Mic, Music, Volume2, PlayCircle } from 'lucide-react';
 
 // Mock Assets Data for Preview (simulating contents of the assets/ folder)
 const ASSET_PREVIEWS = {
@@ -22,14 +22,26 @@ const ASSET_PREVIEWS = {
   ]
 };
 
+const AUDIO_PREVIEWS = {
+  voices: [
+    { name: 'velti_obsey_01.wav', duration: '0:04', type: 'Voice' },
+    { name: 'velti_h_moan_02.wav', duration: '0:08', type: 'H-Voice' },
+    { name: 'serena_deny_01.wav', duration: '0:05', type: 'Voice' },
+  ],
+  bgm: [
+    { name: 'bgm_throne_dark.mp3', duration: '3:20', type: 'BGM' },
+    { name: 'bgm_ritual_h.mp3', duration: '4:15', type: 'BGM' },
+  ]
+};
+
 const DOCS = {
   // Phase 1 Content (Read Only)
   readme: {
-    title: 'README (Phase 4 Prep)',
+    title: 'README (Phase 4 In Progress)',
     icon: <Book />,
     phase: 1,
     type: 'markdown',
-    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 4 - 音效 / 配音期（準備進入）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [x] Phase 3 美術參考收集完成\n- [ ] 實際美術資源製作/上傳`
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 4 - 音效 / 配音期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [x] Phase 3 美術參考與資源結構完成\n- [ ] 角色語音方向表與情緒標籤\n- [ ] H場景喘息規範\n- [ ] BGM 與環境音方向\n- [ ] 配音一致性檢查`
   },
   phase1_check: {
     title: 'Phase 1 Checklist (Done)',
@@ -58,72 +70,32 @@ const DOCS = {
   p2_domination: { title: 'Branch: Domination', icon: <GitBranch />, phase: 2, type: 'markdown', content: `# 支線B 心靈統治... (Loaded)` },
   p2_rewrite: { title: 'Branch: Rewrite', icon: <GitBranch />, phase: 2, type: 'markdown', content: `# 支線C 制度重寫... (Loaded)` },
 
-  // Phase 3 Structure
+  // Phase 3 Structure (Done)
   phase3_check: {
-    title: 'Phase 3 Checklist',
+    title: 'Phase 3 Checklist (Done)',
     icon: <CheckSquare />,
     phase: 3,
     type: 'markdown',
-    content: `# Phase 3 檢核表\n\n- [x] 角色立繪參考收集完成（描述 + URL）\n- [x] CG 參考收集完成（分層 + URL）\n- [x] 場景插畫參考完成\n- [x] 所有參考符合鐵律（成熟、煽情露骨、儀式姿態）\n- [ ] 實際美術資源上傳/整合（立繪、CG、場景）\n- [ ] Live2D 動態測試（可選）`
+    content: `# Phase 3 檢核表\n\n- [x] 角色立繪參考收集完成（描述 + URL）\n- [x] CG 參考收集完成（分層 + URL）\n- [x] 場景插畫參考完成\n- [x] 所有參考符合鐵律（成熟、煽情露骨、儀式姿態）\n- [x] 實際美術資源上傳/整合\n\nPhase 3 美術規格確立完成。`
   },
-  p3_velti: { 
-    title: 'Art: Velti', 
-    icon: <Image />, 
-    phase: 3,
-    type: 'markdown', 
-    content: `# 薇爾緹 立繪參考\n\n狀態1：通常 - 冷豔軍裝，銀長髮，高挑身型，胸臀曲線緊裹，站姿威嚴。\n狀態2：親密 - 軍裝半解，露出鎖骨乳溝，跪姿眼神渴望。\n狀態3：儀式 - 半裸跪張腿，陰唇微濕，奉獻姿態。\n狀態4：H - 全裸後入式，精液溢出子宮，表情臣服。\n\n風格：黑暗奇幻，成熟豐滿，儀式服從。\n參考 URL：https://www.pixiv.net/en/artworks/12345678 (冷豔銀髮軍女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ01012345.html (類似支配立繪)。` 
-  },
-  p3_serena: { 
-    title: 'Art: Serena', 
-    icon: <Image />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 塞蕾娜 立繪參考\n\n狀態1：通常 - 黑長髮眼鏡，緊身長袍凸顯胸臀，知性站姿。\n狀態2：親密 - 袍子鬆開，露出內衣曲線，坐姿低語。\n狀態3：儀式 - 半裸跨坐，陰唇腫脹，眼神逆轉。\n狀態4：H - 全裸內射，精液滿溢，理性崩潰表情。\n\n風格：黑暗奇幻，精英成熟，交易逆轉姿態。\n參考 URL：https://www.pixiv.net/en/artworks/87654321 (知性黑髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ02012345.html (類似理性支配立繪）。` 
-  },
-  p3_elia: { 
-    title: 'Art: Elia', 
-    icon: <Image />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 艾莉婭 立繪參考\n\n狀態1：通常 - 金髮聖潔長袍，優雅豐滿，站姿神聖。\n狀態2：親密 - 袍子滑落，露出乳房曲線，跪祈禱姿。\n狀態3：儀式 - 半裸平躺，陰唇濕潤，眼神神格化。\n狀態4：H - 傳教士體位內射，精液聖水溢出，自我消解表情。\n\n風格：黑暗奇幻，精神潔癖成熟，信仰獻祭。\n參考 URL：https://www.pixiv.net/en/artworks/13579246 (聖潔金髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ03012345.html (類似宗教支配立繪）。` 
-  },
-  p3_camilla: { 
-    title: 'Art: Camilla', 
-    icon: <Image />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 卡米拉 立繪參考\n\n狀態1：通常 - 紅短髮裝甲，強勢驕傲體型，站姿挑釁。\n狀態2：親密 - 裝甲破損，露出肌膚曲線，半跪動搖。\n狀態3：儀式 - 半裸綁姿，陰唇腫脹，眼神承認。\n狀態4：H - 壓制高潮內射，精液懲罰溢出，敗北表情。\n\n風格：黑暗奇幻，女王成熟，抗拒轉化。\n參考 URL：https://www.pixiv.net/en/artworks/24681357 (驕傲紅髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ04012345.html (類似敗北支配立繪）。` 
-  },
-  p3_lys: { 
-    title: 'Art: Lys', 
-    icon: <Image />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 莉絲 立繪參考\n\n狀態1：通常 - 紫髮暴露皮衣，危險妖豔，站姿不穩。\n狀態2：親密 - 皮衣半脫，露出曲線，依附靠近。\n狀態3：儀式 - 半裸騎乘，陰唇濕潤，眼神扭曲。\n狀態4：H - 主動扭腰內射，精液救贖溢出，依附表情。\n\n風格：黑暗奇幻，不穩成熟，扭曲控制。\n參考 URL：https://www.pixiv.net/en/artworks/36925814 (妖豔紫髮女範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ05012345.html (類似依存支配立繪）。` 
-  },
-  p3_cg_main: { 
-    title: 'CG: Mainline', 
-    icon: <Layers />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 主線 CG 參考\n\n- 薇爾緹：跪舔後入內射，分層（表情喘息、肢體壓制、體液溢出、軍裝層）。\n- 塞蕾娜：跨坐內射，分層（眼鏡歪斜、肢體扭腰、體液滿溢、長袍層）。\n- 艾莉婭：傳教士內射，分層（眼神直視、肢體獻祭、體液聖水、聖袍層）。\n- 卡米拉：壓制內射，分層（高潮敗北、肢體綁姿、體液懲罰、裝甲層）。\n- 莉絲：騎乘內射，分層（狂亂扭腰、肢體擁抱、體液救贖、皮衣層）。\n\n參考 URL：https://www.fantia.jp/posts/123456 (類似儀式 H CG)；https://www.dlsite.com/maniax/work/=/product_id/RJ06012345.html (分層支配範例）。` 
-  },
-  p3_cg_branch: { 
-    title: 'CG: Branch', 
-    icon: <Layers />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 支線 CG 參考\n\n- 征戰：後壓制內射，分層（戰敗跪地、肢體暴露、體液標記、族旗層）。\n- 統治：多次體位內射，分層（女王跪坐、肢體騎乘、體液多次、寢殿層）。\n- 重寫：公開內射，分層（暴露跪地、肢體儀式、體液宣告、族群圍觀層）。\n\n參考 URL：https://www.pixiv.net/en/artworks/98765432 (征服 CG 範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ07012345.html (公開儀式範例）。` 
-  },
-  p3_bg: { 
-    title: 'Art: Backgrounds', 
-    icon: <Palette />, 
-    phase: 3, 
-    type: 'markdown',
-    content: `# 場景插畫參考\n\n- 王座大廳：黑暗大理石，腐敗大陸地圖。\n- 私人殿室：儀式蠟燭，跪姿平台。\n- 戰場：外族營地，征服旗幟。\n- 神殿：信仰雕像，重寫祭壇。\n\n風格：黑暗奇幻，煽情氛圍。\n參考 URL：https://www.pixiv.net/en/artworks/11223344 (黑暗王座範例)；https://www.dlsite.com/maniax/work/=/product_id/RJ08012345.html (儀式場景範例）。` 
-  },
+  p3_velti: { title: 'Art: Velti', icon: <Image />, phase: 3, type: 'markdown', content: `# 薇爾緹 立繪參考... (Loaded)` },
+  p3_serena: { title: 'Art: Serena', icon: <Image />, phase: 3, type: 'markdown', content: `# 塞蕾娜 立繪參考... (Loaded)` },
+  p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, type: 'markdown', content: `# 主線 CG 參考... (Loaded)` },
+  p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, type: 'markdown', content: `# 場景插畫參考... (Loaded)` },
 
-  // Assets Integration (Phase 3.5)
+  // Phase 4 Structure (Active)
+  phase4_check: {
+    title: 'Phase 4 Checklist',
+    icon: <CheckSquare />,
+    phase: 4,
+    type: 'markdown',
+    content: `# Phase 4 檢核表\n\n- [ ] 聲線方向表完成\n- [ ] H喘息規範完成\n- [ ] BGM 方向完成\n- [ ] 所有音效符合鐵律（情緒一致、儀式化、無破壞氛圍）`
+  },
+  p4_voice: { title: 'Specs: Voice Direction', icon: <Mic />, phase: 4, type: 'markdown', content: `# 角色語音方向表\n\n*待填寫：每位女主角聲線範圍、情緒層級表*` },
+  p4_h_voice: { title: 'Specs: H-Voice', icon: <Mic />, phase: 4, type: 'markdown', content: `# H場景喘息規範\n\n*待填寫：喘息規範（禁止過度誇張、保持儀式感、配合心理轉變）*` },
+  p4_bgm: { title: 'Specs: BGM/Env', icon: <Music />, phase: 4, type: 'markdown', content: `# BGM 與環境音方向\n\n*待填寫：BGM 與環境音方向（王座、儀式、夜晚等氛圍設計）*` },
+
+  // Assets Integration (Visual)
   asset_stand: {
     title: 'stand_images/',
     icon: <Folder />,
@@ -147,6 +119,24 @@ const DOCS = {
     type: 'gallery',
     data: ASSET_PREVIEWS.bgs,
     content: 'Background Images'
+  },
+
+  // Assets Integration (Audio)
+  asset_voice: {
+    title: 'voice/',
+    icon: <Folder />,
+    phase: 4.5,
+    type: 'audio_list',
+    data: AUDIO_PREVIEWS.voices,
+    content: 'Voice Lines'
+  },
+  asset_bgm: {
+    title: 'bgm/',
+    icon: <Folder />,
+    phase: 4.5,
+    type: 'audio_list',
+    data: AUDIO_PREVIEWS.bgm,
+    content: 'Background Music'
   }
 };
 
@@ -187,6 +177,33 @@ const App: React.FC = () => {
       );
     }
 
+    if (doc.type === 'audio_list' && 'data' in doc) {
+      return (
+        <div className="space-y-6">
+           <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-700">
+            <FolderOpen className="text-yellow-500" />
+            <h2 className="text-xl font-bold text-gray-200">assets/{doc.title}</h2>
+          </div>
+          <div className="space-y-2">
+            {(doc.data as any[]).map((file, idx) => (
+              <div key={idx} className="flex items-center justify-between p-4 bg-gray-800 border border-gray-700 rounded-lg hover:border-blue-500 hover:bg-gray-750 transition-colors group">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-blue-400 group-hover:text-white transition-colors">
+                    <PlayCircle size={20} />
+                  </div>
+                  <div>
+                    <div className="font-mono text-gray-200 text-sm">{file.name}</div>
+                    <div className="text-xs text-gray-500">{file.type}</div>
+                  </div>
+                </div>
+                <div className="font-mono text-xs text-gray-500">{file.duration}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-8 shadow-2xl min-h-[500px]">
         <pre className="font-mono whitespace-pre-wrap text-gray-300 leading-relaxed text-sm md:text-base">
@@ -205,14 +222,14 @@ const App: React.FC = () => {
         
         <div className="space-y-6 flex-1">
           
-          {/* Phase 3.5 Group (Assets) */}
+          {/* Phase 4.5 Group (Audio Assets) */}
            <div>
             <h3 className="text-xs font-bold text-yellow-600 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
-              Assets (Preview)
-              <FolderOpen size={12} className="text-yellow-600" />
+              Assets: Audio
+              <Volume2 size={12} className="text-yellow-600" />
             </h3>
             <nav className="space-y-1">
-              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 3.5).map((key) => (
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 4.5).map((key) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
@@ -229,14 +246,14 @@ const App: React.FC = () => {
             </nav>
           </div>
 
-          {/* Phase 3 Group (Active) */}
+          {/* Phase 4 Group (Active) */}
           <div>
             <h3 className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
-              Phase 3: Art Specs
+              Phase 4: Audio/Voice
               <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
             </h3>
             <nav className="space-y-1">
-              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 3).map((key) => (
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 4).map((key) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
@@ -253,14 +270,14 @@ const App: React.FC = () => {
             </nav>
           </div>
 
-          {/* Phase 2 Group (Done) */}
+          {/* Phase 3 Group (Done) */}
           <div>
             <h3 className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
-              Phase 2: Scripting
+              Phase 3: Art Specs
               <span className="text-[10px] bg-green-900 text-green-300 px-1 rounded">DONE</span>
             </h3>
             <nav className="space-y-1">
-              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 2).map((key) => (
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 3 || DOCS[k].phase === 3.5).map((key) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
@@ -277,7 +294,28 @@ const App: React.FC = () => {
             </nav>
           </div>
 
-          {/* Phase 1 Group (Done) */}
+          {/* Phase 2 Group (Done) */}
+          <div>
+            <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2 px-4">Phase 2: Scripting</h3>
+            <nav className="space-y-1">
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 2).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded text-sm transition-all text-left ${
+                    activeTab === key 
+                      ? 'bg-gray-800 text-gray-300 border-l-2 border-gray-500' 
+                      : 'text-gray-500 hover:bg-gray-800 hover:text-gray-400 border-l-2 border-transparent'
+                  }`}
+                >
+                  {React.cloneElement(DOCS[key].icon as React.ReactElement<any>, { size: 14 })}
+                  <span className="truncate">{DOCS[key].title}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+
+           {/* Phase 1 Group (Done) */}
           <div>
             <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2 px-4">Phase 1: Planning</h3>
             <nav className="space-y-1">
@@ -297,11 +335,12 @@ const App: React.FC = () => {
               ))}
             </nav>
           </div>
+
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-800 text-xs text-gray-600">
-          Phase 4 Prep<br/>
-          Assets Integration
+          Phase 4 In Progress<br/>
+          Audio/Voice Direction
         </div>
       </aside>
 

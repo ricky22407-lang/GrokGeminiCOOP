@@ -1,4 +1,7 @@
 assets/
 ├── stand_images/      # Character Standing Arts
 ├── cg_images/         # Event CGs
-└── backgrounds/       # Scenery
+├── backgrounds/       # Scenery
+├── voice/             # Character Voice Lines (categorized by character)
+├── bgm/               # Background Music
+└── sfx/               # Sound Effects (Environment, UI, H-scenes)
