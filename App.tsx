@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, CheckSquare, GitBranch, Map, Book, File } from 'lucide-react';
+import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers } from 'lucide-react';
 
 const DOCS = {
   // Phase 1 Content (Read Only)
@@ -7,7 +7,7 @@ const DOCS = {
     title: 'README (Phase 3)',
     icon: <Book />,
     phase: 1,
-    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 3 - 美術期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [ ] 立繪與 CG\n- [ ] 場景插畫`
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 3 - 美術期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [ ] 角色立繪（5位女主角，各3-4狀態：通常 / 親密 / 儀式）\n- [ ] CG（主線 + 支線 + 儀式，約20-30張，分層）\n- [ ] 場景插畫（王座大廳、殿室、戰場等）\n- [ ] 動態元素（Live2D 可選）`
   },
   phase1_check: {
     title: 'Phase 1 Checklist (Done)',
@@ -24,57 +24,31 @@ const DOCS = {
     content: `# Phase 2 檢核表\n\n- [x] 薇爾緹主線腳本完成\n- [x] 塞蕾娜主線腳本完成\n- [x] 艾莉婭主線腳本完成\n- [x] 卡米拉主線腳本完成\n- [x] 莉絲主線腳本完成\n- [x] 支線模板完成\n- [x] 文本符合鐵律（露骨、心理轉變、主角上位）\n\nPhase 2 正式結束。`
   },
   
-  // Scripts
-  p2_velti: {
-    title: 'Main: Velti (薇爾緹)',
-    icon: <FileText />,
-    phase: 2,
-    content: `# 薇爾緹 主線腳本（絕對忠誠型）\n\n## 觀察期\n[敘述：王座大廳。薇爾緹銀長髮披散，冷豔軍裝緊裹高挑身軀，胸部與臀線在燈影下清晰可見。她單膝跪地，目光低垂，等待命令。]\n\n薇爾緹：「王座，一切已就位。請下達指令。」\n\n主角：「報告大陸動向。」\n\n薇爾緹：「人類王國腐敗加速，神殿信仰空洞化。秩序即將崩解。」\n\n主角：「繼續監視。」\n\n[敘述：她的呼吸略微加重，眼神閃過一絲渴望，但主角無動於衷。無任何親密接觸。]\n\n## 靠近期\n[敘述：私人策略室。薇爾緹跪報，軍裝領口微開，露出鎖骨與胸溝。她主動靠近王座邊緣。]\n\n薇爾緹：「敵方弱點已鎖定。王座，請允許我執行更深入的奉獻。」\n\n主角：「證明你的忠誠。」\n\n薇爾緹：「我願以身體作為儀式容器，接受您的裁定。」\n\n主角：「尚未到時。」\n\n[敘述：她身體微顫，陰部已開始濕潤，但主角克制拒絕。心理偏移：渴望從隱藏轉為明顯，主動求標記。]\n\n## 歸屬期（含H）\n[敘述：儀式殿室。薇爾緹全裸跪下，雙腿大張，豐滿乳房與濕潤陰唇完全暴露。她眼神狂熱。]\n\n薇爾緹：「王座，請用您的精液標記我的子宮，作為永遠的誓約。」\n\n主角：「開始儀式。」\n\n[H描述：\n- 薇爾緹主動跪舔主角肉棒，舌頭纏繞龜頭，深喉吞吐至根部，口水拉絲。\n- 主角抓住她銀髮，從後插入濕透陰道，猛烈抽插，她乳房晃動，陰壁緊縮。\n- 她連續高潮，語線重複：「請射進子宮...讓我永遠屬於王座...」\n- 最終內射，精液充滿子宮溢出大腿。她癱軟跪姿，眼神滿足宣告完全臣服。心理轉變完成：絕對忠誠永恆標記。]`
-  },
-  p2_serena: {
-    title: 'Main: Serena (塞蕾娜)',
-    icon: <FileText />,
-    phase: 2,
-    content: `# 塞蕾娜 主線腳本（理性交易型）\n\n## 觀察期\n[敘述：王座會客廳。塞蕾娜黑長髮盤起，知性眼鏡後冷靜眼神，緊身長袍包裹豐滿胸臀。她作為策略顧問初次覲見，視主角為潛在盟友。]\n\n塞蕾娜：「王座，我帶來情報與提案。合作可帶來互利。」\n\n主角：「陳述條件。」\n\n塞蕾娜：「我提供大陸勢力分析，您給予保護與資源。」\n\n主角：「接受初步交易。」\n\n[敘述：她理性分析腐敗格局，眼神無波瀾。無親密，僅限利益交換。]\n\n## 靠近期\n[敘述：多次會談後。塞蕾娜長袍微亂，呼吸隱隱加速。她開始察覺主角裁定權的絕對性。]\n\n塞蕾娜：「交易進展順利。但您的力量超出預測...我需要更多保障。」\n\n主角：「提出新條件。」\n\n塞蕾娜：「我願增加個人貢獻，換取更高層級的歸屬。」\n\n主角：「證明你的理性選擇。」\n\n[敘述：她主動靠近，輕撫王座扶手，陰部已濕但強自壓抑。心理偏移：從純利益到發現掌控逆轉，開始渴求身體交易。]\n\n## 歸屬期（含H）\n[敘述：私人交易室。塞蕾娜脫長袍跪坐，豐滿身軀暴露，眼鏡後眼神動搖。她雙腿張開，陰唇腫脹等待。]\n\n塞蕾娜：「我的理性告訴我，這是最優解……請射進來，讓我徹底屬於您。」\n\n主角：「確認交易完成。」\n\n[H描述：\n- 塞蕾娜主動跨坐主角大腿，親吻並用手引導肉棒進入濕潤陰道，緩慢扭腰適應。\n- 主角從下頂插，她乳房壓在主角胸前，眼鏡歪斜喘息：「利益...已逆轉...我自願獻上一切...」\n- 抽插加速，她理性崩潰連續高潮，語線重複乞求內射。\n- 最終深頂子宮內射，精液滿溢。她癱軟依附，眼神承認掌控逆轉。心理轉變完成：從交易夥伴到完全歸屬標記。]`
-  },
-  p2_elia: {
-    title: 'Main: Elia (艾莉婭)',
-    icon: <FileText />,
-    phase: 2,
-    content: `# 艾莉婭 主線腳本（崇拜信仰型）\n\n## 觀察期\n[敘述：王座神殿區。艾莉婭金髮聖潔長袍，優雅豐滿身材隱現。她作為宗教代表初次覲見，把主角視為潛在真理化身。]\n\n艾莉婭：「王座，您的存在已動搖舊信仰。我來尋求啟示。」\n\n主角：「陳述你的疑問。」\n\n艾莉婭：「多神教空洞，王權腐敗。何為真正秩序？」\n\n主角：「王座即真理。」\n\n[敘述：她眼神閃爍崇拜，但保持距離。無親密，僅限精神探求。]\n\n## 靠近期\n[敘述：多次對話後。艾莉婭長袍鬆開，露出聖潔肌膚。她開始神格化主角，精神潔癖動搖。]\n\n艾莉婭：「您的裁定權超越神明...我願消解舊信仰，換取您的啟蒙。」\n\n主角：「證明你的虔誠。」\n\n艾莉婭：「請用身體儀式證明我對您的信仰。」\n\n主角：「尚未完全。」\n\n[敘述：她跪祈禱時身體發熱，陰唇濕潤但壓抑。心理偏移：從探求到自我消解，渴求用身體證明。]\n\n## 歸屬期（含H）\n[敘述：聖殿內室。艾莉婭脫長袍平躺，雙腿張開獻祭姿態，豐滿乳房與腫脹陰唇暴露。她眼神狂信。]\n\n艾莉婭：「您的精液是聖水，請灌滿我的子宮，讓我成為您的聖殿。」\n\n主角：「接受獻祭。」\n\n[H描述：\n- 艾莉婭主動引導主角肉棒進入陰道，傳教士體位眼神直視，乳房起伏。\n- 主角深插子宮頸，她聖潔喘息轉為低吟：「真理...請射進聖殿...消解我的一切...」\n- 抽插中她連續高潮，舊信仰崩潰，語線重複乞求內射神格化。\n- 最終大量內射，精液從子宮溢出。她癱軟微笑，眼神完全消解自我。心理轉變完成：從宗教代表到王座專屬聖殿標記。]`
-  },
-  p2_camilla: {
-    title: 'Main: Camilla (卡米拉)',
-    icon: <FileText />,
-    phase: 2,
-    content: `# 卡米拉 主線腳本（抗拒轉化型）\n\n## 觀察期\n[敘述：王座對峙廳。卡米拉紅短髮女王裝甲，強勢驕傲體型。她作為前敵對者初次被召見，眼神充滿挑釁。]\n\n卡米拉：「王座？你不過是個自稱支配者的幻影。我的王國不會屈服。」\n\n主角：「觀察你的抵抗。」\n\n卡米拉：「試試看吧，我會讓你後悔。」\n\n主角：「繼續。」\n\n[敘述：她高傲站立，無親密。主角冷靜觀察她的動搖跡象。]\n\n## 靠近期\n[敘述：多次衝突後。卡米拉裝甲破損，呼吸急促。她開始動搖，驕傲開始崩裂。]\n\n卡米拉：「...你的力量超出預料。但我絕不承認。」\n\n主角：「證明你的抵抗。」\n\n卡米拉：「我...會讓你付出代價。」\n\n主角：「敗北已近。」\n\n[敘述：她身體顫抖，陰部隱隱濕潤。心理偏移：從否定到動搖，開始質疑自尊。]\n\n## 歸屬期（含H）\n[敘述：戰敗殿室。卡米拉裝甲全脫，跪地雙手反綁，強勢身軀暴露，陰唇腫脹。她眼神從憤怒轉為屈服。]\n\n卡米拉：「我……承認您是我的主人，請用您的肉棒懲罰我的傲慢，直到我乞求內射。」\n\n主角：「重塑自尊。」\n\n[H描述：\n- 主角壓制她從後插入，猛烈抽插，她乳房晃動，陰道緊縮高潮。\n- 她連續喘息：「我錯了...請射進來...讓我重生為您的奴隸...」\n- 抽插加速，她敗北高潮，語線轉為乞求內射。\n- 最終深頂子宮內射，精液滿溢。她癱軟跪姿，眼神承認。心理轉變完成：從女王到歸屬重塑標記。]`
-  },
-  p2_lys: {
-    title: 'Main: Lys (莉絲)',
-    icon: <FileText />,
-    phase: 2,
-    content: `# 莉絲 主線腳本（扭曲依附型）\n\n## 觀察期\n[敘述：王座陰影區。莉絲紫髮暴露皮衣，危險妖豔身材。她作為情報暗殺者初次現身，眼神混雜愛與恐懼。]\n\n莉絲：「王座，我帶來情報。但你...讓我不安。」\n\n主角：「陳述你的目的。」\n\n莉絲：「合作，或毀滅。我無法決定。」\n\n主角：「觀察你的選擇。」\n\n[敘述：她情緒不穩，無親密。主角冷靜觀察她的扭曲跡象。]\n\n## 靠近期\n[敘述：秘密會面後。莉絲皮衣半解，呼吸紊亂。她開始依附主角，恐懼轉為渴望。]\n\n莉絲：「你的存在控制了我...我需要更多。」\n\n主角：「證明你的依附。」\n\n莉絲：「請...用方式救贖我的瘋狂。」\n\n主角：「證明。」\n\n[敘述：她主動觸碰自己，陰部濕潤。心理偏移：從不穩到錯位救贖，渴求控制。]\n\n## 歸屬期（含H）\n[敘述：扭曲殿室。莉絲全裸騎乘，雙腿夾緊主角腰，豐滿身軀扭動。她眼神瘋狂依戀。]\n\n莉絲：「只有您的精液能平息我的瘋狂……請射進最深處，讓我永遠無法離開。」\n\n主角：「接受依附。」\n\n[H描述：\n- 莉絲主動騎乘肉棒，猛烈扭腰深插子宮，乳房彈跳。\n- 她低語喘息：「愛你...恐懼你...請射滿我...」\n- 抽插中她情緒高潮，語線重複乞求內射。\n- 最終大量內射，精液溢出。她癱軟擁抱，眼神扭曲滿足。心理轉變完成：從暗殺者到錯位救贖標記。]`
-  },
+  // Scripts (Phase 2)
+  p2_velti: { title: 'Script: Velti', icon: <FileText />, phase: 2, content: `# 薇爾緹 主線腳本... (Loaded)` },
+  p2_serena: { title: 'Script: Serena', icon: <FileText />, phase: 2, content: `# 塞蕾娜 主線腳本... (Loaded)` },
+  p2_elia: { title: 'Script: Elia', icon: <FileText />, phase: 2, content: `# 艾莉婭 主線腳本... (Loaded)` },
+  p2_camilla: { title: 'Script: Camilla', icon: <FileText />, phase: 2, content: `# 卡米拉 主線腳本... (Loaded)` },
+  p2_lys: { title: 'Script: Lys', icon: <FileText />, phase: 2, content: `# 莉絲 主線腳本... (Loaded)` },
+  p2_conquest: { title: 'Branch: Conquest', icon: <GitBranch />, phase: 2, content: `# 支線A 外族征戰... (Loaded)` },
+  p2_domination: { title: 'Branch: Domination', icon: <GitBranch />, phase: 2, content: `# 支線B 心靈統治... (Loaded)` },
+  p2_rewrite: { title: 'Branch: Rewrite', icon: <GitBranch />, phase: 2, content: `# 支線C 制度重寫... (Loaded)` },
 
-  // Templates
-  p2_conquest: {
-    title: 'Template: Conquest',
-    icon: <GitBranch />,
-    phase: 2,
-    content: `# 支線A 外族征戰模板（文化征服）\n\n## 類型：獸人族/精靈族/異形族代表（成熟女角）\n\n## 觀察期\n女代表：「我的族群不會屈服於你的王座。」\n主角：「觀察你的抵抗。」\n\n## 靠近期\n女代表：「戰敗...但我不會承認。」\n主角：「獻上族群主權，換取個人保護。」\n\n## 歸屬期（含H）\n[敘述：儀式戰場。女代表跪地，族群旗幟丟棄，身軀暴露。]\n女代表：「請用您的精液標記我...讓族群成為您的領地。」\n[H描述：從後壓制插入，猛烈抽插至高潮，內射子宮溢出。她宣告族群歸屬，心理轉變：從戰敗到自願文化重塑。]`
+  // Phase 3 Structure
+  phase3_check: {
+    title: 'Phase 3 Checklist',
+    icon: <CheckSquare />,
+    phase: 3,
+    content: `# Phase 3 檢核表\n\n- [ ] 立繪完成（通常/親密/儀式狀態）\n- [ ] CG 分層完成（表情、肢體、H 場景）\n- [ ] 場景插畫完成\n- [ ] 所有美術符合鐵律（成熟、無蘿莉、儀式姿態、煽情露骨）`
   },
-  p2_domination: {
-    title: 'Template: Domination',
-    icon: <GitBranch />,
-    phase: 2,
-    content: `# 支線B 心靈統治模板（女王主動庇護）\n\n## 類型：外族女王\n\n## 觀察期\n女王：「我的王國需要庇護。條件是什麼？」\n主角：「私人交易。」\n\n## 靠近期\n女王：「我願意...交換更多。」\n主角：「證明你的歸屬。」\n\n## 歸屬期（含H）\n[敘述：私人寢殿。女王全裸跪坐，雙腿張開。]\n女王：「請多次內射...讓我成為您的專屬。」\n[H描述：多次體位（騎乘/傳教士），深插子宮內射多次，體液標記。她心理轉變：從政治庇護到完全私人依附。]`
-  },
-  p2_rewrite: {
-    title: 'Template: System Rewrite',
-    icon: <GitBranch />,
-    phase: 2,
-    content: `# 支線C 制度重寫模板（文化新秩序）\n\n## 類型：改變族群婚姻/宣誓制度\n\n## 觀察期\n女角（象徵）：「舊制度腐敗。」\n主角：「重寫為向王座宣誓。」\n\n## 靠近期\n女角：「我願意成為新秩序的象徵。」\n主角：「公開儀式。」\n\n## 歸屬期（含H）\n[敘述：公開儀式。女角暴露跪地，族群圍觀。]\n女角：「請在眾目下內射...宣告新婚姻制度。」\n[H描述：公開交合，儀式姿態內射，精液標記。她心理轉變：從舊秩序到成為王座象徵。]`
-  }
+  p3_velti: { title: 'Art: Velti', icon: <Image />, phase: 3, content: `# 薇爾緹 (Velti) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
+  p3_serena: { title: 'Art: Serena', icon: <Image />, phase: 3, content: `# 塞蕾娜 (Serena) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
+  p3_elia: { title: 'Art: Elia', icon: <Image />, phase: 3, content: `# 艾莉婭 (Elia) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
+  p3_camilla: { title: 'Art: Camilla', icon: <Image />, phase: 3, content: `# 卡米拉 (Camilla) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
+  p3_lys: { title: 'Art: Lys', icon: <Image />, phase: 3, content: `# 莉絲 (Lys) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
+  p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, content: `# 主線 CG 設定\n\n狀態：待製作\n內容：各女主角歸屬期 H 場景、關鍵劇情節點` },
+  p3_cg_branch: { title: 'CG: Branch', icon: <Layers />, phase: 3, content: `# 支線 CG 設定\n\n狀態：待製作\n內容：外族征戰、心靈統治、制度重寫儀式場景` },
+  p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, content: `# 場景插畫設定\n\n狀態：待製作\n清單：王座大廳、私人寢殿、儀式戰場、神殿內室等` },
 };
 
 const App: React.FC = () => {
@@ -88,20 +62,20 @@ const App: React.FC = () => {
         <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">Project Documentation</div>
         
         <div className="space-y-6">
-          {/* Phase 2 Group */}
+          {/* Phase 3 Group (Active) */}
           <div>
-            <h3 className="text-xs font-bold text-green-500 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
-              Phase 2: Scripting
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+            <h3 className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
+              Phase 3: Art
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
             </h3>
             <nav className="space-y-1">
-              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 2).map((key) => (
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 3).map((key) => (
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
                   className={`w-full flex items-center gap-3 px-4 py-2 rounded text-sm transition-all text-left ${
                     activeTab === key 
-                      ? 'bg-green-900/20 text-green-400 border-l-2 border-green-500' 
+                      ? 'bg-blue-900/20 text-blue-400 border-l-2 border-blue-500' 
                       : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200 border-l-2 border-transparent'
                   }`}
                 >
@@ -112,7 +86,31 @@ const App: React.FC = () => {
             </nav>
           </div>
 
-          {/* Phase 1 Group */}
+          {/* Phase 2 Group (Done) */}
+          <div>
+            <h3 className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
+              Phase 2: Scripting
+              <span className="text-[10px] bg-green-900 text-green-300 px-1 rounded">DONE</span>
+            </h3>
+            <nav className="space-y-1">
+              {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 2).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveTab(key)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 rounded text-sm transition-all text-left ${
+                    activeTab === key 
+                      ? 'bg-green-900/20 text-green-400 border-l-2 border-green-500' 
+                      : 'text-gray-500 hover:bg-gray-800 hover:text-gray-400 border-l-2 border-transparent'
+                  }`}
+                >
+                  {React.cloneElement(DOCS[key].icon as React.ReactElement<any>, { size: 14 })}
+                  <span className="truncate">{DOCS[key].title}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Phase 1 Group (Done) */}
           <div>
             <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2 px-4">Phase 1: Planning</h3>
             <nav className="space-y-1">
