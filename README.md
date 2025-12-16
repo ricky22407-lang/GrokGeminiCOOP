@@ -13,13 +13,12 @@
 7. 文本與素材必須足夠煽情露骨：不迴避成人內容的核心吸引力。
 
 ## 當前階段
-Phase 1 - 企劃期（進行中）
+Phase 2 - 文本期（進行中）
 
 ## 進度
-- [x] 世界觀文檔 (docs/world_setting.md)
-- [x] 角色設定表 (docs/character_settings.md)
-- [x] 故事流程圖 (docs/story_flowchart.md)
-- [x] Phase 1 檢核表 (docs/phase1_checklist.md)
+- [x] Phase 1 企劃期完成
+- [ ] 主線五女主角腳本
+- [ ] 支線模板
 
 ## 開發筆記
-本儲存庫目前處於文檔建置模式。Web 預覽器已配置為顯示上述設計文檔。
+本儲存庫目前進入 Phase 2 文本建置模式。Web 預覽器已更新以顯示腳本結構。
