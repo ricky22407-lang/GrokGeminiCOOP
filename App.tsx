@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen, Mic, Music, Volume2, PlayCircle } from 'lucide-react';
+import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen, Mic, Music, Volume2, PlayCircle, ShieldCheck } from 'lucide-react';
 
 // Mock Assets Data for Preview (simulating contents of the assets/ folder)
 const ASSET_PREVIEWS = {
@@ -37,11 +37,11 @@ const AUDIO_PREVIEWS = {
 const DOCS = {
   // Phase 1 Content (Read Only)
   readme: {
-    title: 'README (Phase 4 In Progress)',
+    title: 'README (Phase 5 Prep)',
     icon: <Book />,
     phase: 1,
     type: 'markdown',
-    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 4 - 音效 / 配音期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [x] Phase 3 美術參考與資源結構完成\n- [ ] 角色語音方向表與情緒標籤\n- [ ] H場景喘息規範\n- [ ] BGM 與環境音方向\n- [ ] 配音一致性檢查`
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 5 - 整合測試期（準備進入）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [x] Phase 3 美術參考與資源結構完成\n- [x] Phase 4 音效/配音規範完成\n- [ ] 角色一致性審核\n- [ ] H場景鐵律檢查`
   },
   phase1_check: {
     title: 'Phase 1 Checklist (Done)',
@@ -83,17 +83,35 @@ const DOCS = {
   p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, type: 'markdown', content: `# 主線 CG 參考... (Loaded)` },
   p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, type: 'markdown', content: `# 場景插畫參考... (Loaded)` },
 
-  // Phase 4 Structure (Active)
+  // Phase 4 Structure (Done)
   phase4_check: {
-    title: 'Phase 4 Checklist',
+    title: 'Phase 4 Checklist (Done)',
     icon: <CheckSquare />,
     phase: 4,
     type: 'markdown',
-    content: `# Phase 4 檢核表\n\n- [ ] 聲線方向表完成\n- [ ] H喘息規範完成\n- [ ] BGM 方向完成\n- [ ] 所有音效符合鐵律（情緒一致、儀式化、無破壞氛圍）`
+    content: `# Phase 4 檢核表\n\n- [x] 角色語音方向表完成\n- [x] H場景喘息規範完成\n- [x] BGM 與環境音方向完成\n- [ ] 配音樣本收集/試錄（可選）\n- [x] 所有音效符合鐵律（情緒一致、儀式化、無誇張）\n\nPhase 4 完成，下一步 Phase 5 整合測試期。`
   },
-  p4_voice: { title: 'Specs: Voice Direction', icon: <Mic />, phase: 4, type: 'markdown', content: `# 角色語音方向表\n\n*待填寫：每位女主角聲線範圍、情緒層級表*` },
-  p4_h_voice: { title: 'Specs: H-Voice', icon: <Mic />, phase: 4, type: 'markdown', content: `# H場景喘息規範\n\n*待填寫：喘息規範（禁止過度誇張、保持儀式感、配合心理轉變）*` },
-  p4_bgm: { title: 'Specs: BGM/Env', icon: <Music />, phase: 4, type: 'markdown', content: `# BGM 與環境音方向\n\n*待填寫：BGM 與環境音方向（王座、儀式、夜晚等氛圍設計）*` },
+  p4_voice: { 
+    title: 'Specs: Voice Direction', 
+    icon: <Mic />, 
+    phase: 4, 
+    type: 'markdown', 
+    content: `# 角色語音方向表\n\n每位女主角限定聲線範圍（日語配音優先），情緒層級：低（冷靜/低語） / 中（偏移/試探） / 高（歸屬宣告）\n\n1. 薇爾緹（絕對忠誠型）\n   - 聲線：低沉冷靜女聲，軍事風格，語速緩慢。\n   - 低：平靜報告\n   - 中：輕微顫抖的渴望\n   - 高：儀式性宣誓（無高音尖叫）\n\n2. 塞蕾娜（理性交易型）\n   - 聲線：知性成熟女聲，眼鏡系冷靜。\n   - 低：理性分析\n   - 中：語氣微亂的計算\n   - 高：理性崩潰後的低語承認\n\n3. 艾莉婭（崇拜信仰型）\n   - 聲線：優雅聖潔女聲，輕柔。\n   - 低：神聖探求\n   - 中：信仰動搖的低喃\n   - 高：獻祭式宣告（平靜狂熱）\n\n4. 卡米拉（抗拒轉化型）\n   - 聲線：強勢高傲女聲，女王風。\n   - 低：挑釁否定\n   - 中：動搖壓抑\n   - 高：敗北後的低聲乞求\n\n5. 莉絲（扭曲依附型）\n   - 聲線：危險妖媚女聲，情緒波動。\n   - 低：不穩低語\n   - 中：恐懼與渴望交織\n   - 高：扭曲滿足的喘息宣告` 
+  },
+  p4_h_voice: { 
+    title: 'Specs: H-Voice', 
+    icon: <Mic />, 
+    phase: 4, 
+    type: 'markdown', 
+    content: `# H場景喘息規範（鐵律重點）\n\n- 禁止過度誇張、尖叫式、破壞氛圍的喘音。\n- 所有 H 語音以「儀式化、低語、宣告」為主。\n- 喘息層級：輕微呼吸加速 → 壓抑低吟 → 歸屬宣告時短促喘息。\n- 關鍵語線必須清晰錄製（例如「請用您的精液標記我的子宮」需平靜而堅定）。\n- 禁止可愛化、嬌喘過頭，保持成熟支配氛圍。\n- 體液音效分離（可後製），語音本身不模擬濕潤聲。` 
+  },
+  p4_bgm: { 
+    title: 'Specs: BGM/Env', 
+    icon: <Music />, 
+    phase: 4, 
+    type: 'markdown', 
+    content: `# BGM 與環境音方向\n\n風格整體：黑暗奇幻管弦，低音主導，冷靜壓抑。\n\n- 王座大廳 BGM：低沉弦樂 + 遙遠鐘聲，威嚴冷靜。\n- 私人殿室 BGM：低頻脈動 + 蠟燭燃燒環境音，儀式感。\n- 歸屬期 BGM：緩慢上升弦樂，內射瞬間短促高潮音（無過度激昂）。\n- 夜晚/支線 BGM：低沉鋼琴 + 風聲/遠處低語。\n- 環境音：石廳回音、鎖鏈輕響、呼吸迴響（增強支配感）。\n\n參考作品風格：類似《Overlord》OST 低沉版，或黑暗儀式音樂。` 
+  },
 
   // Assets Integration (Visual)
   asset_stand: {
@@ -246,11 +264,11 @@ const App: React.FC = () => {
             </nav>
           </div>
 
-          {/* Phase 4 Group (Active) */}
+          {/* Phase 4 Group (Done) */}
           <div>
-            <h3 className="text-xs font-bold text-blue-500 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
+            <h3 className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 px-4 flex items-center justify-between">
               Phase 4: Audio/Voice
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+              <span className="text-[10px] bg-green-900 text-green-300 px-1 rounded">DONE</span>
             </h3>
             <nav className="space-y-1">
               {(Object.keys(DOCS) as Array<keyof typeof DOCS>).filter(k => DOCS[k].phase === 4).map((key) => (
@@ -259,8 +277,8 @@ const App: React.FC = () => {
                   onClick={() => setActiveTab(key)}
                   className={`w-full flex items-center gap-3 px-4 py-2 rounded text-sm transition-all text-left ${
                     activeTab === key 
-                      ? 'bg-blue-900/20 text-blue-400 border-l-2 border-blue-500' 
-                      : 'text-gray-400 hover:bg-gray-800 hover:text-gray-200 border-l-2 border-transparent'
+                      ? 'bg-green-900/20 text-green-400 border-l-2 border-green-500' 
+                      : 'text-gray-500 hover:bg-gray-800 hover:text-gray-400 border-l-2 border-transparent'
                   }`}
                 >
                   {React.cloneElement(DOCS[key].icon as React.ReactElement<any>, { size: 14 })}
@@ -339,8 +357,8 @@ const App: React.FC = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-800 text-xs text-gray-600">
-          Phase 4 In Progress<br/>
-          Audio/Voice Direction
+          Phase 5 Prep<br/>
+          Integration Testing
         </div>
       </aside>
 
