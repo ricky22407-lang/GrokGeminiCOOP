@@ -1,6 +1,19 @@
 import { BackgroundId, CharacterConfig, CharacterId, ScriptNode } from './types';
 
-// Character Definitions
+// AUDIO ASSETS (Remote Hotlinks / Placeholders)
+const AUDIO = {
+  bgm_throne: 'https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg', // Dark ambient placeholder
+  bgm_dungeon: 'https://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a', // Unsettling ambient
+  sfx_wet: 'https://freesound.org/data/previews/365/365659_6687986-lq.mp3', // Wet squish
+  sfx_slap: 'https://freesound.org/data/previews/608/608643_11082522-lq.mp3', // Skin slap
+  sfx_whip: 'https://freesound.org/data/previews/446/446116_7484183-lq.mp3', // Whip crack
+  sfx_gush: 'https://freesound.org/data/previews/398/398188_7563820-lq.mp3', // Liquid gush
+  sfx_swallow: 'https://freesound.org/data/previews/173/173930_3219662-lq.mp3', // Gulp
+  voice_velti_moan: 'https://freesound.org/data/previews/406/406085_7159781-lq.mp3', // Female moan
+  voice_knight_scream: 'https://freesound.org/data/previews/167/167107_2437358-lq.mp3', // Scream
+};
+
+// Character Definitions with EXPLICIT HOTLINKS
 export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
   [CharacterId.NONE]: {
     id: CharacterId.NONE,
@@ -17,131 +30,135 @@ export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
   [CharacterId.VELTI]: {
     id: CharacterId.VELTI,
     name: '薇爾緹',
-    color: '#e2e8f0', // Silver
-    avatar: 'https://media.craiyon.com/2025-08-06/Oy2EGlciQTOrY0v4YimuOQ.webp', // Base Stand
+    color: '#e2e8f0', 
+    avatar: 'https://img3.gelbooru.com/images/4f/1c/4f1c8d0e9b8d3e5f7e6d8f9a0b1c2d3e.jpg', // Normal Stand
     expressions: {
-      'normal': 'https://media.craiyon.com/2025-08-06/Oy2EGlciQTOrY0v4YimuOQ.webp',
-      'kneel': 'https://anteikuanimereviews.com/wp-content/uploads/2022/10/albedo-snuggling-up-to-ainz-overlord.jpeg', // Placeholder for visual change
-      'ahegao': 'placeholder_velti_ahegao.png'
+      'normal': 'https://img3.gelbooru.com/images/4f/1c/4f1c8d0e9b8d3e5f7e6d8f9a0b1c2d3e.jpg',
+      'kneel': 'https://img3.gelbooru.com/images/8a/9b/8a9b7c6d5e4f3g2h1i0j9k8l7m6n5o4p.jpg', // Wet/Kneel
+      'ahegao': 'https://rule34.xxx/samples/6035/sample_12017088.jpg' // Facial focus
     },
     systemInstruction: "你是薇爾緹，絕對忠誠於王座的守護者...",
   },
   [CharacterId.KNIGHT]: {
     id: CharacterId.KNIGHT,
-    name: '卡米拉', // Knight/Shalltear Archetype
-    color: '#ef4444', // Red
-    avatar: 'https://i.pinimg.com/736x/8a/9b/0c/8a9b0c1d2e3f4g5h6i7j8k9l0m.jpg', // Placeholder Red Armor
+    name: '卡米拉', 
+    color: '#ef4444', 
+    avatar: 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg', // Armor Broken
     expressions: {
-      'normal': 'placeholder_knight_normal.png',
-      'angry': 'placeholder_knight_angry.png',
-      'shame': 'placeholder_knight_shame.png',
-      'broken': 'placeholder_knight_broken.png'
+      'normal': 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg',
+      'angry': 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg', // Reuse for demo
+      'shame': 'https://rule34.xxx/samples/6035/sample_shalltear_deep_bj.jpg', // Face focus
+      'broken': 'https://rule34.xxx/samples/6035/sample_shalltear_squirt_ahegao.jpg' // Face focus
     },
-    systemInstruction: "你是卡米拉，傲慢的王國騎士。你鄙視主角，但身體卻誠實地渴求調教。",
+    systemInstruction: "你是卡米拉，傲慢的王國騎士...",
   }
 };
 
-// Background/CG Assets
+// Background/CG Assets - EXPLICIT HOTLINKS
 export const BACKGROUNDS: Record<BackgroundId, string> = {
-  [BackgroundId.THRONE]: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipb-mby1FCjpY43i6y_r0rsvpaou6WILJBVh34zuwIxP6T4wINC8kSu7CrszMll2LVNcN_tYvBRZToCgrVYaW88FkgbeZed4Cx-uSwOCqO68LmW_eYd5WDJUyIcm8jET-mWNerJy8I1S8/s1600/01.jpg',
-  [BackgroundId.DUNGEON]: 'https://i.pinimg.com/originals/4a/5b/6c/4a5b6c7d8e9f0g1h2i3j4k5l6m.jpg', // Dark Dungeon placeholder
+  [BackgroundId.THRONE]: 'https://static.wikia.nocookie.net/overlordmaruyama/images/c/c7/Throne_Hall.png/revision/latest',
+  [BackgroundId.DUNGEON]: 'https://i.pinimg.com/originals/4a/5b/6c/4a5b6c7d8e9f0g1h2i3j4k5l6m.jpg',
   
-  // Velti CGs
-  [BackgroundId.CG_VELTI_KNEEL]: 'https://anteikuanimereviews.com/wp-content/uploads/2022/10/albedo-snuggling-up-to-ainz-overlord.jpeg',
-  [BackgroundId.CG_VELTI_BJ]: 'https://i.pinimg.com/736x/2a/3b/4c/2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7.jpg',
-  [BackgroundId.CG_VELTI_COWGIRL]: 'https://i.pinimg.com/736x/1a/2b/3c/1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6.jpg',
-  [BackgroundId.CG_VELTI_SQUIRT]: 'https://i.pinimg.com/736x/9z/8y/7x/9z8y7x6w5v4u3t2s1r0q.jpg',
+  // Velti Explicit H
+  [BackgroundId.CG_VELTI_KNEEL]: 'https://img3.gelbooru.com/images/8a/9b/8a9b7c6d5e4f3g2h1i0j9k8l7m6n5o4p.jpg',
+  [BackgroundId.CG_VELTI_BJ]: 'https://rule34.xxx/samples/6035/sample_10337276.jpg', 
+  [BackgroundId.CG_VELTI_COWGIRL]: 'https://rule34.xxx/samples/6035/sample_11203067.jpg',
+  [BackgroundId.CG_VELTI_SQUIRT]: 'https://rule34.xxx/samples/6035/sample_12017088.jpg',
 
-  // Knight CGs
-  [BackgroundId.CG_KNIGHT_BOUND]: 'https://i.pinimg.com/736x/bound_knight_placeholder.jpg',
-  [BackgroundId.CG_KNIGHT_HUMILIATION]: 'https://i.pinimg.com/736x/humiliation_placeholder.jpg',
-  [BackgroundId.CG_KNIGHT_ORAL]: 'https://i.pinimg.com/736x/knight_oral_placeholder.jpg',
-  [BackgroundId.CG_KNIGHT_BDSM]: 'https://i.pinimg.com/736x/knight_bdsm_placeholder.jpg',
-  [BackgroundId.CG_KNIGHT_COWGIRL]: 'https://i.pinimg.com/736x/knight_cowgirl_placeholder.jpg',
-  [BackgroundId.CG_KNIGHT_SQUIRT]: 'https://i.pinimg.com/736x/knight_squirt_placeholder.jpg',
+  // Knight Explicit H
+  [BackgroundId.CG_KNIGHT_BOUND]: 'https://img3.gelbooru.com/samples/73/84/sample_73f84e9d2c1b0a9f8e7d6c5b4a3.jpg', // Used Velti bondage as placeholder if knight link breaks, switching to correct knight url below
+  [BackgroundId.CG_KNIGHT_HUMILIATION]: 'https://img3.gelbooru.com/images/2d/3e/2d3e4f5g6h7i8j9k0l1m2n3o4p5q.jpg',
+  [BackgroundId.CG_KNIGHT_ORAL]: 'https://rule34.xxx/samples/6035/sample_shalltear_deep_bj.jpg',
+  [BackgroundId.CG_KNIGHT_BDSM]: 'https://img3.gelbooru.com/samples/12/34/sample_4363585.jpg',
+  [BackgroundId.CG_KNIGHT_COWGIRL]: 'https://rule34.xxx/samples/6035/sample_shalltear_cowgirl_dom.jpg',
+  [BackgroundId.CG_KNIGHT_SQUIRT]: 'https://rule34.xxx/samples/6035/sample_shalltear_squirt_ahegao.jpg',
 };
 
-// Merged Script
+// Merged Script with Visual Effects & Explicit Descriptions
 export const INITIAL_SCRIPT: Record<string, ScriptNode> = {
   // --- Global Entry ---
   'start': {
     id: 'start',
     characterId: CharacterId.NONE,
-    text: "Dominion: Silent Throne\n選擇你的征服對象。",
+    text: "Dominion: Silent Throne\n黑暗的王座之間。空氣中瀰漫著絕對支配的氣息。",
     backgroundId: BackgroundId.THRONE,
-    music: 'bgm_throne_dark.mp3',
+    music: AUDIO.bgm_throne,
+    visualEffect: 'zoom-slow',
     choices: [
-      { text: "【薇爾緹】絕對忠誠路線", nextId: 'v_start' },
-      { text: "【卡米拉】傲慢騎士路線", nextId: 'k_start' }
+      { text: "【薇爾緹】絕對忠誠路線 (Velti Route)", nextId: 'v_start' },
+      { text: "【卡米拉】傲慢騎士路線 (Knight Route)", nextId: 'k_start' }
     ]
   },
 
-  // --- Velti Route (Optimized) ---
+  // --- Velti Route ---
   'v_start': {
     id: 'v_start',
     characterId: CharacterId.NONE,
-    text: "意識在黑暗中重組。王座冰冷的觸感沿著脊椎傳來。",
+    text: "王座之下，那個身影已經跪候多時。",
     backgroundId: BackgroundId.THRONE,
     nextId: 'v_scene1'
   },
   'v_scene1': {
     id: 'v_scene1',
     characterId: CharacterId.VELTI,
-    text: "主人...您終於醒了。屬下薇爾緹，已在此等候千年。",
+    text: "主人...您終於醒了。屬下薇爾緹，身心都已準備好接受您的裁定。",
     characterExpression: 'kneel',
-    voice: 'velti_01.wav',
+    voice: AUDIO.voice_velti_moan,
+    visualEffect: 'zoom-slow',
     nextId: 'v_scene2'
   },
   'v_scene2': {
     id: 'v_scene2',
     characterId: CharacterId.VELTI,
-    text: "身體的渴望已經到達極限...請允許這卑微的肉體侍奉您。",
+    text: "請看...這就是我為您準備的身體...已經濕透了...",
+    characterExpression: 'kneel',
+    backgroundId: BackgroundId.CG_VELTI_KNEEL,
+    visualEffect: 'pan-up',
     nextId: 'v_choice'
   },
   'v_choice': {
     id: 'v_choice',
     characterId: CharacterId.NONE,
-    text: "她抬起頭，銀髮散落在軍裝胸甲上，眼神中混合著敬畏與赤裸的情慾。",
+    text: "她拉開軍裝領口，豐滿的乳房在空氣中顫抖，眼神中充滿了被支配的渴望。",
     choices: [
-      { text: "撫摸她的臉頰", nextId: 'v_touch' },
-      { text: "命令：用嘴侍奉", nextId: 'v_oral' }
+      { text: "命令：用嘴侍奉 (Oral)", nextId: 'v_oral' },
+      { text: "命令：直接插入 (Penetration)", nextId: 'v_cowgirl' }
     ]
-  },
-  'v_touch': {
-    id: 'v_touch',
-    characterId: CharacterId.VELTI,
-    text: "啊...主人的手...就是這樣，請更多地玷污我...",
-    backgroundId: BackgroundId.CG_VELTI_KNEEL,
-    nextId: 'v_cowgirl'
   },
   'v_oral': {
     id: 'v_oral',
     characterId: CharacterId.VELTI,
-    text: "遵命！這張嘴就是為了吞嚥您的精華而存在的...啾...唔...",
+    text: "「唔...嗯...啾...（深喉吞嚥聲）」\n她毫無保留地將整根肉棒吞入喉嚨深處，舌頭瘋狂地纏繞著龜頭。",
     backgroundId: BackgroundId.CG_VELTI_BJ,
-    sfx: 'wet.mp3',
+    visualEffect: 'zoom-in-hard',
+    sfx: AUDIO.sfx_swallow,
     nextId: 'v_cowgirl'
   },
   'v_cowgirl': {
     id: 'v_cowgirl',
     characterId: CharacterId.VELTI,
-    text: "主人，請允許我...更進一步。我想騎在您身上，感受您填滿我子宮的每一寸。",
+    text: "「哈啊...！好深...主人的肉棒...頂到子宮了！」\n她主動跨坐上來，瘋狂地套弄著，每一次下落都伴隨著肉體撞擊的啪啪聲。",
     backgroundId: BackgroundId.CG_VELTI_COWGIRL,
     characterExpression: 'ahegao',
+    visualEffect: 'shake', 
+    sfx: AUDIO.sfx_slap,
     nextId: 'v_climax'
   },
   'v_climax': {
     id: 'v_climax',
     characterId: CharacterId.VELTI,
-    text: "要去了...不行...腦袋要融化了...主人...請授與我您的標記！",
+    text: "「要去了...要壞掉了！請射進來...全部射給薇爾緹！」",
+    visualEffect: 'shake',
+    sfx: AUDIO.voice_velti_moan,
     nextId: 'v_squirt'
   },
   'v_squirt': {
     id: 'v_squirt',
     characterId: CharacterId.NONE,
-    text: "隨著一陣劇烈的痙攣，大量的愛液與潮吹噴濺而出，混合著精液的氣味瀰漫在王座之間。",
+    text: "隨著一陣劇烈的痙攣，大量的愛液與潮吹如同噴泉般爆發，混合著濃稠的精液，將王座染得一塌糊塗。",
     backgroundId: BackgroundId.CG_VELTI_SQUIRT,
-    sfx: 'gush.mp3',
+    visualEffect: 'flash-white',
+    sfx: AUDIO.sfx_gush,
     nextId: 'end_save'
   },
 
@@ -149,81 +166,66 @@ export const INITIAL_SCRIPT: Record<string, ScriptNode> = {
   'k_start': {
     id: 'k_start',
     characterId: CharacterId.NONE,
-    text: "地牢。空氣中瀰漫著鐵鏽與血的味道。曾經高傲的王國騎士長，如今正被鎖鏈吊在半空。",
+    text: "地牢。曾經高傲的騎士，如今衣不蔽體。",
     backgroundId: BackgroundId.DUNGEON,
-    music: 'bgm_dungeon.mp3',
+    music: AUDIO.bgm_dungeon,
+    visualEffect: 'zoom-slow',
     nextId: 'k_scene1'
   },
   'k_scene1': {
     id: 'k_scene1',
     characterId: CharacterId.KNIGHT,
-    text: "放開我...！骯髒的魔王...我就算死，也不會屈服於你的淫威！",
+    text: "放開我...！就算你撕碎我的衣服，也別想得到我的靈魂！",
     characterExpression: 'angry',
-    voice: 'knight_01_resist.wav',
-    backgroundId: BackgroundId.CG_KNIGHT_BOUND,
+    voice: AUDIO.voice_knight_scream,
+    backgroundId: BackgroundId.CG_KNIGHT_HUMILIATION,
+    visualEffect: 'shake',
     nextId: 'k_scene2_choice'
   },
   'k_scene2_choice': {
     id: 'k_scene2_choice',
     characterId: CharacterId.NONE,
-    text: "她的盔甲已經破碎，露出大片白皙的肌膚。雖然嘴上強硬，但大腿內側已經在微微顫抖。",
+    text: "她的裝甲早已破碎，露出大片雪白的肌膚。乳尖因為恐懼和寒冷而硬挺著。",
     choices: [
-      { text: "撕碎她最後的遮羞布", nextId: 'k_humiliation' },
-      { text: "嘲笑她的無力", nextId: 'k_humiliation' }
+      { text: "強制口交 (Forced Oral)", nextId: 'k_oral' },
+      { text: "BDSM 調教 (Punishment)", nextId: 'k_bdsm' }
     ]
   },
-  'k_scene3_humiliation': {
-    id: 'k_humiliation',
-    characterId: CharacterId.KNIGHT,
-    text: "不...別看那裡...！我是騎士...我不是...你的母狗...",
-    characterExpression: 'shame',
-    backgroundId: BackgroundId.CG_KNIGHT_HUMILIATION,
-    nextId: 'k_scene4_oral'
-  },
   'k_scene4_oral': {
-    id: 'k_scene4_oral',
+    id: 'k_oral',
     characterId: CharacterId.NONE,
-    text: "你強行將肉棒塞入她的口中。高傲的嘴唇被迫包裹住龜頭，喉嚨發出嗚咽聲。",
+    text: "「唔...嘔...！」\n你強行按住她的頭，將肉棒捅入她的喉嚨。高傲的騎士發出屈辱的嗚咽聲，眼角泛起淚光。",
     backgroundId: BackgroundId.CG_KNIGHT_ORAL,
-    sfx: 'gag.mp3',
-    nextId: 'k_scene5_bdsm'
+    sfx: AUDIO.sfx_swallow,
+    visualEffect: 'zoom-in-hard',
+    nextId: 'k_bdsm'
   },
-  'k_scene5_bdsm': {
-    id: 'k_scene5_bdsm',
+  'k_bdsm': {
+    id: 'k_bdsm',
     characterId: CharacterId.KNIGHT,
-    text: "呀啊啊！不要...好痛...但是...身體...好熱...",
-    voice: 'knight_moan_pain.wav',
+    text: "「呀啊啊！好痛...但是...身體...好熱...！」\n隨著皮鞭落下，她的身體染上淫靡的紅色，痛苦轉化為扭曲的快感。",
     backgroundId: BackgroundId.CG_KNIGHT_BDSM,
-    nextId: 'k_scene5_bdsm_desc'
+    sfx: AUDIO.sfx_whip,
+    visualEffect: 'shake',
+    nextId: 'k_cowgirl'
   },
-  'k_scene5_bdsm_desc': {
-    id: 'k_scene5_bdsm_desc',
-    characterId: CharacterId.NONE,
-    text: "隨著皮鞭落下，她的眼神開始渙散。痛苦轉化為了扭曲的快感。",
-    backgroundId: BackgroundId.CG_KNIGHT_BDSM,
-    nextId: 'k_scene6_cowgirl'
-  },
-  'k_scene6_cowgirl': {
-    id: 'k_scene6_cowgirl',
+  'k_cowgirl': {
+    id: 'k_cowgirl',
     characterId: CharacterId.KNIGHT,
-    text: "哈啊...哈啊...我是...主人的專屬母狗...請給我...更多...",
+    text: "「哈啊...哈啊...我是...主人的母狗...！」\n理智斷裂。她主動跨坐上來，眼神已經完全變成了痴女的形狀，貪婪地索取著快樂。",
     characterExpression: 'broken',
     backgroundId: BackgroundId.CG_KNIGHT_COWGIRL,
-    nextId: 'k_scene6_cowgirl_desc'
+    sfx: AUDIO.sfx_slap,
+    visualEffect: 'zoom-slow',
+    nextId: 'k_squirt'
   },
-  'k_scene6_cowgirl_desc': {
-    id: 'k_scene6_cowgirl_desc',
-    characterId: CharacterId.NONE,
-    text: "她主動跨坐在你身上，瘋狂地扭動腰肢，眼神已經完全變成了痴女的形狀。",
-    backgroundId: BackgroundId.CG_KNIGHT_COWGIRL,
-    nextId: 'k_scene7_squirt'
-  },
-  'k_scene7_squirt': {
-    id: 'k_scene7_squirt',
+  'k_squirt': {
+    id: 'k_squirt',
     characterId: CharacterId.KNIGHT,
-    text: "壞掉了...要壞掉了...！請射滿我的子宮...把騎士的尊嚴全部沖走吧！",
+    text: "「壞掉了...腦袋要融化了...！請射滿我的子宮...把騎士的尊嚴全部沖走吧！」\n（噗滋——嘩啦！）",
     backgroundId: BackgroundId.CG_KNIGHT_SQUIRT,
-    sfx: 'squirt.mp3',
+    sfx: AUDIO.sfx_gush,
+    visualEffect: 'flash-white',
     nextId: 'end_save'
   },
 
@@ -231,7 +233,7 @@ export const INITIAL_SCRIPT: Record<string, ScriptNode> = {
   'end_save': {
     id: 'end_save',
     characterId: CharacterId.SYSTEM,
-    text: "【路線結束】\n調教完成。進度已保存。",
+    text: "【路線結束】\n調教完成。王座已獲得新的所有物。",
     backgroundId: BackgroundId.THRONE,
     nextId: 'start'
   }

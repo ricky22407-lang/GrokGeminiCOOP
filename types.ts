@@ -7,29 +7,32 @@ export enum CharacterId {
 
 export enum BackgroundId {
   THRONE = 'throne_room',
-  DUNGEON = 'dungeon_room', // New for Knight route
+  DUNGEON = 'dungeon_room', 
   
-  // Velti CGs
+  // Velti Explicit H-Scenes
   CG_VELTI_KNEEL = 'cg_velti_kneel',
-  CG_VELTI_BJ = 'cg_velti_bj',
-  CG_VELTI_COWGIRL = 'cg_velti_cowgirl',
-  CG_VELTI_SQUIRT = 'cg_velti_squirt',
+  CG_VELTI_BJ = 'cg_velti_bj_explicit', // Updated
+  CG_VELTI_COWGIRL = 'cg_velti_cowgirl_explicit', // Updated
+  CG_VELTI_SQUIRT = 'cg_velti_squirt_explicit', // Updated
 
-  // Knight CGs
+  // Knight Explicit H-Scenes
   CG_KNIGHT_BOUND = 'cg_knight_bound',
   CG_KNIGHT_HUMILIATION = 'cg_knight_humiliation',
-  CG_KNIGHT_ORAL = 'cg_knight_oral',
+  CG_KNIGHT_ORAL = 'cg_knight_oral_explicit', // Updated
   CG_KNIGHT_BDSM = 'cg_knight_bdsm',
-  CG_KNIGHT_COWGIRL = 'cg_knight_cowgirl',
-  CG_KNIGHT_SQUIRT = 'cg_knight_squirt'
+  CG_KNIGHT_COWGIRL = 'cg_knight_cowgirl_explicit', // Updated
+  CG_KNIGHT_SQUIRT = 'cg_knight_squirt_explicit' // Updated
 }
+
+export type VisualEffect = 'none' | 'zoom-slow' | 'zoom-in-hard' | 'pan-up' | 'shake' | 'flash-white';
 
 export interface ScriptNode {
   id: string;
   characterId: CharacterId;
   text: string; 
   backgroundId?: BackgroundId; 
-  characterExpression?: string; // e.g., 'normal', 'angry', 'shame', 'ahegao'
+  characterExpression?: string; 
+  visualEffect?: VisualEffect; // New: Camera effects
   choices?: Choice[];
   nextId?: string;
   music?: string;
@@ -65,6 +68,6 @@ export interface CharacterConfig {
   name: string;
   color: string;
   avatar: string; 
-  expressions?: Record<string, string>; // Map expression names to image URLs
+  expressions?: Record<string, string>; 
   systemInstruction?: string; 
 }

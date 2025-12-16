@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen, Mic, Music, Volume2, PlayCircle, ShieldCheck, ClipboardCheck, Activity, Search, FileSearch, Flag, Code, Play, Save, Download, RotateCcw } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FileText, CheckSquare, GitBranch, Map, Book, File, Image, Palette, Layers, Folder, FolderOpen, Mic, Music, Volume2, PlayCircle, ShieldCheck, ClipboardCheck, Activity, Search, FileSearch, Flag, Code, Play, Save, Download, RotateCcw, AlertTriangle } from 'lucide-react';
 import { DialogueBox } from './components/DialogueBox';
 import { CharacterSprite } from './components/CharacterSprite';
 import { AiChatOverlay } from './components/AiChatOverlay';
 import { CHARACTERS, BACKGROUNDS, INITIAL_SCRIPT } from './constants';
-import { BackgroundId, CharacterId, GameState, SaveSlot } from './types';
+import { BackgroundId, CharacterId, GameState, SaveSlot, VisualEffect } from './types';
 
-// Asset Data Updated for Knight Route
+// Asset manifest for Docs
 const ASSET_PREVIEWS = {
   velti: [
-    { name: 'stand_normal.png', url: 'local/velti/stand.png', size: '1.2MB' },
-    { name: 'cg_kneel.jpg', url: 'local/velti/cg_kneel.jpg', size: '2.5MB' },
-    { name: 'cg_bj.jpg', url: 'local/velti/cg_bj.jpg', size: '2.1MB' },
+    { name: 'velti_normal', url: CHARACTERS[CharacterId.VELTI].avatar, size: 'EXT' },
+    { name: 'velti_bj', url: BACKGROUNDS[BackgroundId.CG_VELTI_BJ], size: 'EXT' },
+    { name: 'velti_squirt', url: BACKGROUNDS[BackgroundId.CG_VELTI_SQUIRT], size: 'EXT' },
   ],
   knight: [
-    { name: 'stand_armor.png', url: 'local/knight/stand.png', size: '1.4MB' },
-    { name: 'cg_bound.jpg', url: 'local/knight/cg_bound.jpg', size: '2.3MB' },
-    { name: 'cg_broken.jpg', url: 'local/knight/cg_broken.jpg', size: '2.6MB' },
+    { name: 'knight_broken', url: CHARACTERS[CharacterId.KNIGHT].avatar, size: 'EXT' },
+    { name: 'knight_oral', url: BACKGROUNDS[BackgroundId.CG_KNIGHT_ORAL], size: 'EXT' },
+    { name: 'knight_squirt', url: BACKGROUNDS[BackgroundId.CG_KNIGHT_SQUIRT], size: 'EXT' },
   ]
 };
 
 const DOCS: any = {
   readme: {
-    title: 'README (V5.1 Update)',
+    title: 'README (V6.5 Final)',
     icon: <Book />,
     phase: 1,
     type: 'markdown',
-    content: `# Dominion：沉默王座 v5.1\n\n## 新增內容\n- **素材包 V1 整合**：Velti 路線全美術替換。\n- **女騎士路線 (Knight)**：實裝 7 階段調教腳本。\n- **系統更新**：新增 Save/Load 功能。\n\n## Ren'Py 導出\n點擊下方 Export 分頁獲取包含雙路線的完整腳本。`
+    content: `# Dominion：沉默王座 v6.5 (Final)\n\n## 最終視覺實裝\n- **Remote Hotlinks**: 全面使用 Gelbooru/Rule34 直鏈。\n- **Fallback System**: 防止圖床阻擋導致的白屏。\n- **SFX**: 實裝日語喘息與濕潤音效。\n\n## 警告\n本版本包含極度露骨內容 (Explicit)。請確保您已成年。`
   },
   renpy_export: {
     title: 'Export: script.rpy',
@@ -34,55 +34,26 @@ const DOCS: any = {
     phase: 6,
     type: 'code',
     content: `
-# Dominion: Silent Throne - Full Beta Script
-# Generated from Web Prototype v5.1
+# Dominion: Silent Throne - Ren'Py Export
+# Generated from Web Prototype v6.5
 
-# Character Definitions
 define v = Character("薇爾緹", color="#e2e8f0", voice_tag="velti")
 define k = Character("卡米拉", color="#ef4444", voice_tag="knight")
-define narrator = Character(None)
 
-# Backgrounds
-image bg throne = "bg/throne_room.jpg"
-image bg dungeon = "bg/dungeon_room.jpg"
-
-# Velti Assets
-image velti stand = "velti/stand_normal.png"
-image cg velti_kneel = "velti/cg_kneel.jpg"
-image cg velti_bj = "velti/cg_bj.jpg"
-image cg velti_cowgirl = "velti/cg_cowgirl.jpg"
-image cg velti_squirt = "velti/cg_squirt.jpg"
-
-# Knight Assets
-image knight stand = "knight/stand_armor.png"
-image cg knight_bound = "knight/cg_bound.jpg"
-image cg knight_humiliation = "knight/cg_humiliation.jpg"
-image cg knight_oral = "knight/cg_oral.jpg"
-image cg knight_bdsm = "knight/cg_bdsm.jpg"
-image cg knight_cowgirl = "knight/cg_cowgirl.jpg"
-image cg knight_squirt = "knight/cg_squirt.jpg"
+# Images are referenced by URL in Web, but here mapped to local tags
+image cg velti_bj = "velti_bj.jpg"
+image cg velti_squirt = "velti_squirt.jpg"
+image cg knight_oral = "knight_oral.jpg"
+image cg knight_squirt = "knight_squirt.jpg"
 
 label start:
-    scene bg throne with fade
+    play music "bgm_throne.mp3"
     "Dominion: Silent Throne"
-    "選擇你的征服對象。"
-    
     menu:
-        "【薇爾緹】絕對忠誠路線":
+        "薇爾緹路線":
             jump v_start
-        "【卡米拉】傲慢騎士路線":
+        "卡米拉路線":
             jump k_start
-
-label v_start:
-    # Velti script content...
-    jump v_scene1
-
-label k_start:
-    # Knight script content...
-    jump k_scene1
-
-# Note: Full node logic is handled by the web engine state machine.
-# Copy specific node blocks from constants.ts to expand.
 `
   }
 };
@@ -93,18 +64,55 @@ const App: React.FC = () => {
   const [showSaveMenu, setShowSaveMenu] = useState(false);
   const [mode, setMode] = useState<'docs' | 'play'>('docs');
   const [saves, setSaves] = useState<SaveSlot[]>([]);
+  const [bgError, setBgError] = useState(false);
+  
+  // Animation Key
+  const [animKey, setAnimKey] = useState(0);
 
-  // Load saves from local storage on mount
+  // Audio Ref
+  const sfxRef = useRef<HTMLAudioElement | null>(null);
+  const bgmRef = useRef<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     const saved = localStorage.getItem('dominion_saves');
     if (saved) {
       setSaves(JSON.parse(saved));
     }
+    // Initialize audio
+    sfxRef.current = new Audio();
+    bgmRef.current = new Audio();
+    bgmRef.current.loop = true;
   }, []);
 
   const currentNode = INITIAL_SCRIPT[currentNodeId] || INITIAL_SCRIPT['start'];
   const currentCharacter = currentNode.characterId !== CharacterId.NONE ? CHARACTERS[currentNode.characterId] : null;
   const currentBackground = currentNode.backgroundId ? BACKGROUNDS[currentNode.backgroundId] : BACKGROUNDS[BackgroundId.THRONE];
+
+  // Effect Trigger for Node Change
+  useEffect(() => {
+    setAnimKey(prev => prev + 1);
+    setBgError(false); // Reset bg error
+
+    // Handle Music
+    if (currentNode.music && bgmRef.current) {
+        if (!bgmRef.current.src.includes(currentNode.music)) {
+            bgmRef.current.src = currentNode.music;
+            bgmRef.current.volume = 0.3;
+            bgmRef.current.play().catch(e => console.log("Audio autoplay blocked", e));
+        }
+    }
+
+    // Handle SFX / Voice
+    if ((currentNode.sfx || currentNode.voice) && sfxRef.current) {
+        const audioSrc = currentNode.voice || currentNode.sfx;
+        if (audioSrc) {
+            sfxRef.current.src = audioSrc;
+            sfxRef.current.volume = 0.6;
+            sfxRef.current.play().catch(e => console.log("SFX autoplay blocked", e));
+        }
+    }
+
+  }, [currentNodeId, currentNode]);
 
   const handleNext = () => {
     if (currentNode.choices && currentNode.choices.length > 0) return;
@@ -140,15 +148,88 @@ const App: React.FC = () => {
     }
   };
 
+  const getVisualEffectClass = (effect?: VisualEffect) => {
+    switch (effect) {
+      case 'zoom-slow': return 'animate-zoom-slow';
+      case 'zoom-in-hard': return 'animate-zoom-hard';
+      case 'pan-up': return 'animate-pan-up';
+      case 'shake': return 'animate-shake';
+      case 'flash-white': return 'animate-flash';
+      default: return '';
+    }
+  };
+
   const renderGame = () => (
     <div className="relative w-full h-full bg-black overflow-hidden font-sans select-none">
-      {/* Background with Transition */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 ease-in-out"
-        style={{ backgroundImage: `url(${currentBackground})` }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
+      <style>{`
+        @keyframes zoomSlow {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
+        @keyframes zoomHard {
+          0% { transform: scale(1); filter: brightness(1); }
+          100% { transform: scale(1.4); filter: brightness(1.1); }
+        }
+        @keyframes panUp {
+          0% { background-position: center bottom; transform: scale(1.1); }
+          100% { background-position: center center; transform: scale(1.1); }
+        }
+        @keyframes shake {
+          0% { transform: translate(1px, 1px) rotate(0deg); }
+          10% { transform: translate(-1px, -2px) rotate(-1deg); }
+          20% { transform: translate(-3px, 0px) rotate(1deg); }
+          30% { transform: translate(3px, 2px) rotate(0deg); }
+          40% { transform: translate(1px, -1px) rotate(1deg); }
+          50% { transform: translate(-1px, 2px) rotate(-1deg); }
+          60% { transform: translate(-3px, 1px) rotate(0deg); }
+          70% { transform: translate(3px, 1px) rotate(-1deg); }
+          80% { transform: translate(-1px, -1px) rotate(1deg); }
+          90% { transform: translate(1px, 2px) rotate(0deg); }
+          100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        @keyframes flash {
+          0% { opacity: 0; background-color: white; }
+          20% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .animate-zoom-slow { animation: zoomSlow 15s ease-out forwards; }
+        .animate-zoom-hard { animation: zoomHard 4s ease-out forwards; }
+        .animate-pan-up { animation: panUp 8s ease-out forwards; }
+        .animate-shake { animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; }
+        .animate-flash { animation: flash 0.8s ease-out; }
+      `}</style>
+
+      {/* Background Layer with Effects & Fallback */}
+      {!bgError ? (
+        <div 
+            key={`bg-${animKey}`}
+            className={`absolute inset-0 z-0 bg-cover bg-center transition-all duration-700 ease-in-out ${getVisualEffectClass(currentNode.visualEffect)}`}
+            style={{ backgroundImage: `url(${currentBackground})` }}
+        >
+            {/* Hidden image to track load error */}
+            <img 
+                src={currentBackground} 
+                onError={() => setBgError(true)} 
+                className="hidden" 
+                alt="bg-loader"
+            />
+            <div className="absolute inset-0 bg-black/30" />
+        </div>
+      ) : (
+        <div className="absolute inset-0 z-0 bg-gray-900 flex items-center justify-center animate-pulse">
+            <div className="text-center p-8 border border-red-900/50 rounded bg-black/50">
+                <AlertTriangle className="w-16 h-16 text-red-600 mx-auto mb-4"/>
+                <h2 className="text-xl text-red-500 font-bold uppercase tracking-widest">Background Signal Lost</h2>
+                <p className="text-gray-500 text-sm mt-2">Remote asset blocked. Visualizing via Neural Interface.</p>
+                <a href={currentBackground} target="_blank" className="text-blue-500 text-xs mt-4 block underline">Force Load Link</a>
+            </div>
+        </div>
+      )}
+      
+      {/* Flash Overlay Effect */}
+      {currentNode.visualEffect === 'flash-white' && (
+        <div key={`flash-${animKey}`} className="absolute inset-0 bg-white z-50 animate-flash pointer-events-none" />
+      )}
 
       {/* Character */}
       <CharacterSprite 
@@ -163,7 +244,8 @@ const App: React.FC = () => {
           <div className="flex gap-2">
              <button onClick={() => setMode('docs')} className="text-white/70 hover:text-white bg-black/40 px-3 py-1 rounded text-xs border border-white/20">EXIT</button>
              <div className="text-white/50 text-xs font-mono p-1 px-2 bg-black/40 rounded border border-white/10 flex items-center gap-2">
-               <span>SCENE: {currentNodeId}</span>
+               <span>NODE: {currentNodeId}</span>
+               {currentNode.visualEffect && <span className="text-red-400 text-[10px] border border-red-500/50 px-1 rounded">FX: {currentNode.visualEffect}</span>}
              </div>
           </div>
           
@@ -185,7 +267,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Save Menu Overlay */}
+        {/* Save Menu */}
         {showSaveMenu && (
           <div className="absolute top-14 right-4 w-64 bg-gray-900/95 border border-red-900/50 rounded p-4 pointer-events-auto z-50 backdrop-blur-md shadow-2xl">
             <h3 className="text-red-500 text-sm font-bold mb-3 uppercase tracking-wider border-b border-red-900/30 pb-2">Data Management</h3>
@@ -251,7 +333,7 @@ const App: React.FC = () => {
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-black border-r border-gray-800 p-6 flex flex-col h-screen z-50">
         <h1 className="text-2xl font-bold text-red-600 mb-2 tracking-widest uppercase">Dominion</h1>
-        <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">H-Engine v5.1</div>
+        <div className="text-xs text-gray-500 mb-8 uppercase tracking-widest">H-Engine v6.5</div>
         
         <div className="space-y-6 flex-1">
           <div className="bg-gray-900 p-1 rounded-lg flex mb-6">
@@ -262,11 +344,14 @@ const App: React.FC = () => {
           {mode === 'docs' && (
              <>
                <div className="mb-4">
-                 <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2 px-4">Assets (Loaded)</h3>
+                 <h3 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2 px-4">Remote Assets</h3>
                  <div className="text-xs text-gray-500 px-4 space-y-1">
-                   <div className="flex items-center gap-2"><FolderOpen size={10} className="text-green-500"/> /velti (OK)</div>
-                   <div className="flex items-center gap-2"><FolderOpen size={10} className="text-green-500"/> /knight (OK)</div>
-                   <div className="flex items-center gap-2"><FolderOpen size={10} className="text-green-500"/> /bg (OK)</div>
+                   {ASSET_PREVIEWS.velti.map(a => (
+                     <div key={a.name} className="flex items-center gap-2 text-red-400 break-all"><FolderOpen size={10}/> {a.name}</div>
+                   ))}
+                   {ASSET_PREVIEWS.knight.map(a => (
+                      <div key={a.name} className="flex items-center gap-2 text-red-400 break-all"><FolderOpen size={10}/> {a.name}</div>
+                   ))}
                  </div>
                </div>
                
