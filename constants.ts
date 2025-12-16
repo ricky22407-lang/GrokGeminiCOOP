@@ -14,93 +14,96 @@ export const CHARACTERS: Record<CharacterId, CharacterConfig> = {
     color: '#a0aec0',
     avatar: '',
   },
-  [CharacterId.ELARA]: {
-    id: CharacterId.ELARA,
-    name: 'Elara',
-    color: '#fb7185', // Rose-400
-    avatar: 'https://picsum.photos/seed/elara/300/600',
-    systemInstruction: "You are Elara, a tsundere high school student. You are secretly in love with the protagonist but act cold. You like spicy food and hate rain.",
-  },
-  [CharacterId.KAITO]: {
-    id: CharacterId.KAITO,
-    name: 'Kaito',
-    color: '#60a5fa', // Blue-400
-    avatar: 'https://picsum.photos/seed/kaito/300/600',
-    systemInstruction: "You are Kaito, the protagonist's best friend. You are energetic and a bit of a troublemaker.",
+  [CharacterId.VELTI]: {
+    id: CharacterId.VELTI,
+    name: '薇爾緹',
+    color: '#e2e8f0', // Silver/White for Velti
+    avatar: 'https://media.craiyon.com/2025-08-06/Oy2EGlciQTOrY0v4YimuOQ.webp', // Albedo Stand placeholder
+    systemInstruction: "你是薇爾緹，絕對忠誠於王座的守護者。你說話冷靜、低沉，但對主角有著壓抑不住的狂熱渴求。稱呼主角為「王座」或「大人」。",
   },
 };
 
 // Background Assets
 export const BACKGROUNDS: Record<BackgroundId, string> = {
-  [BackgroundId.CLASSROOM]: 'https://picsum.photos/seed/classroom/1920/1080',
-  [BackgroundId.ROOFTOP]: 'https://picsum.photos/seed/rooftop/1920/1080',
-  [BackgroundId.PARK]: 'https://picsum.photos/seed/park/1920/1080',
-  [BackgroundId.BEDROOM]: 'https://picsum.photos/seed/bedroom/1920/1080',
+  [BackgroundId.THRONE]: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipb-mby1FCjpY43i6y_r0rsvpaou6WILJBVh34zuwIxP6T4wINC8kSu7CrszMll2LVNcN_tYvBRZToCgrVYaW88FkgbeZed4Cx-uSwOCqO68LmW_eYd5WDJUyIcm8jET-mWNerJy8I1S8/s1600/01.jpg',
+  [BackgroundId.CG_ALBEDO]: 'https://anteikuanimereviews.com/wp-content/uploads/2022/10/albedo-snuggling-up-to-ainz-overlord.jpeg',
 };
 
-// Script Content
+// Script Content - Intro Scene
 export const INITIAL_SCRIPT: Record<string, ScriptNode> = {
   'start': {
     id: 'start',
     characterId: CharacterId.NONE,
-    text: "The afternoon sun filters through the classroom windows. Another day is ending.",
-    backgroundId: BackgroundId.CLASSROOM,
-    nextId: 'meet_elara_1'
+    text: "意識逐漸回歸。背後傳來冰冷堅硬的觸感——是王座。",
+    backgroundId: BackgroundId.THRONE,
+    nextId: 'intro_1'
   },
-  'meet_elara_1': {
-    id: 'meet_elara_1',
-    characterId: CharacterId.ELARA,
-    text: "H-Hey! Don't just sit there spacing out. The bell rang five minutes ago.",
-    characterExpression: 'angry',
-    nextId: 'meet_elara_2'
-  },
-  'meet_elara_2': {
-    id: 'meet_elara_2',
+  'intro_1': {
+    id: 'intro_1',
     characterId: CharacterId.NONE,
-    text: "Elara stands over my desk, hands on her hips. She looks impatient as usual.",
-    nextId: 'choice_1'
+    text: "空氣中瀰漫著古老焚香與...某種甜膩的體液氣味。這不是夢，這是我統治的起點。",
+    nextId: 'velti_enter'
   },
-  'choice_1': {
-    id: 'choice_1',
-    characterId: CharacterId.ELARA,
-    text: "Are you listening to me? I said we have cleaning duty today!",
+  'velti_enter': {
+    id: 'velti_enter',
+    characterId: CharacterId.VELTI,
+    text: "王座...您終於甦醒了。",
+    characterExpression: 'kneel',
+    nextId: 'velti_desc'
+  },
+  'velti_desc': {
+    id: 'velti_desc',
+    characterId: CharacterId.NONE,
+    text: "銀髮女子單膝跪在階下。緊身軍裝勒出令人窒息的胸部曲線，領口敞開，隨著她急促的呼吸，那抹雪白彷彿在邀請我的視線。",
+    nextId: 'choice_awakening'
+  },
+  'choice_awakening': {
+    id: 'choice_awakening',
+    characterId: CharacterId.VELTI,
+    text: "屬下薇爾緹，已在此守候千年...請下達您的第一個裁定。",
     choices: [
-      { text: "Sorry, I was lost in thought.", nextId: 'path_apology' },
-      { text: "Why are you always so loud?", nextId: 'path_argument' },
-      { text: "[Enter AI Free Chat]", nextId: 'ai_mode_entry' }
+      { text: "冷靜詢問現狀", nextId: 'path_calm' },
+      { text: "命令她靠近", nextId: 'path_dominate' },
+      { text: "[AI 自由對話模式]", nextId: 'ai_mode_entry' }
     ]
   },
-  'path_apology': {
-    id: 'path_apology',
-    characterId: CharacterId.ELARA,
-    text: "Hmph. At least you admit it. Just grab a broom already.",
-    characterExpression: 'blush',
-    nextId: 'cleanup_scene'
+  'path_calm': {
+    id: 'path_calm',
+    characterId: CharacterId.VELTI,
+    text: "是。目前大陸局勢混亂，人類王國腐敗，正是我們介入的最佳時機。",
+    nextId: 'intro_end'
   },
-  'path_argument': {
-    id: 'path_argument',
-    characterId: CharacterId.ELARA,
-    text: "L-Loud?! I'm only loud because you're so dense!",
-    characterExpression: 'angry',
-    nextId: 'cleanup_scene'
+  'path_dominate': {
+    id: 'path_dominate',
+    characterId: CharacterId.VELTI,
+    text: "遵命...！",
+    // In a real Ren'Py script this would trigger a move transition
+    nextId: 'dominate_1'
   },
-  'cleanup_scene': {
-    id: 'cleanup_scene',
+  'dominate_1': {
+    id: 'dominate_1',
     characterId: CharacterId.NONE,
-    text: "We spent the next twenty minutes cleaning the chalkboard and arranging desks.",
+    text: "她膝行向前，臉頰泛紅，眼神中混合著恐懼與極度的渴望。軍裝下的身體在微微顫抖。",
+    showCg: 'https://anteikuanimereviews.com/wp-content/uploads/2022/10/albedo-snuggling-up-to-ainz-overlord.jpeg', // Using placeholder CG
+    nextId: 'intro_end'
+  },
+  'intro_end': {
+    id: 'intro_end',
+    characterId: CharacterId.NONE,
+    text: "這就是統治的感覺...世界的膝蓋，終將為我而彎曲。",
     nextId: 'end_demo'
   },
   'ai_mode_entry': {
     id: 'ai_mode_entry',
     characterId: CharacterId.SYSTEM,
-    text: "Entering AI Chat Mode. You can now talk freely with Elara.",
+    text: "進入 AI 對話模式。現在你可以直接與薇爾緹對話，測試她的忠誠度。",
     isAiMode: true,
-    nextId: 'end_demo' // Fallback
+    nextId: 'end_demo'
   },
   'end_demo': {
     id: 'end_demo',
     characterId: CharacterId.NONE,
-    text: "End of Engineering Demo.",
-    backgroundId: BackgroundId.BEDROOM
+    text: "序章演示結束。",
+    backgroundId: BackgroundId.THRONE
   }
 };

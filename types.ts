@@ -1,15 +1,12 @@
 export enum CharacterId {
   NONE = 'none',
-  ELARA = 'elara',
-  KAITO = 'kaito',
+  VELTI = 'velti', // Velti (Absolute Loyalty)
   SYSTEM = 'system'
 }
 
 export enum BackgroundId {
-  CLASSROOM = 'classroom',
-  ROOFTOP = 'rooftop',
-  PARK = 'park',
-  BEDROOM = 'bedroom'
+  THRONE = 'throne_room',
+  CG_ALBEDO = 'cg_albedo' // Placeholder for CG scenes
 }
 
 export interface ScriptNode {
@@ -17,11 +14,12 @@ export interface ScriptNode {
   characterId: CharacterId;
   text: string; // The dialogue text
   backgroundId?: BackgroundId; // If set, changes background
-  characterExpression?: string; // e.g., 'smile', 'angry', 'blush'
+  characterExpression?: string; // e.g., 'normal', 'desire', 'kneel'
   choices?: Choice[];
   nextId?: string; // Linear progression ID
   music?: string;
   isAiMode?: boolean; // If true, triggers AI generation context
+  showCg?: string; // URL for CG overlay
 }
 
 export interface Choice {

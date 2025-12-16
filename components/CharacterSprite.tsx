@@ -11,7 +11,9 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({ character, exp
 
   useEffect(() => {
     if (character) {
-      setIsVisible(true);
+      // Small delay for fade in
+      const timer = setTimeout(() => setIsVisible(true), 100);
+      return () => clearTimeout(timer);
     } else {
       setIsVisible(false);
     }
@@ -21,25 +23,25 @@ export const CharacterSprite: React.FC<CharacterSpriteProps> = ({ character, exp
 
   return (
     <div 
-      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 transition-all duration-500 ease-in-out ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 transition-all duration-700 ease-out z-10 ${
+        isVisible ? 'opacity-100 translate-y-0 filter brightness-100' : 'opacity-0 translate-y-8 filter brightness-50'
       }`}
-      style={{ height: '85vh', pointerEvents: 'none' }}
+      style={{ height: '90vh', pointerEvents: 'none' }}
     >
-      {/* Placeholder Image Logic */}
       <img 
         src={character.avatar} 
         alt={character.name}
-        className="h-full w-auto object-contain drop-shadow-2xl"
-        // In a real app, 'expression' would change the src
+        className="h-full w-auto object-contain drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]"
       />
       
-      {/* Expression Overlay (Visual Debug for Demo) */}
+      {/* Expression Debug Overlay (Hidden in Production) */}
+      {/* 
       {expression && (
-        <div className="absolute top-10 right-10 bg-black/50 text-xs px-2 py-1 rounded text-white">
-          Debug: {expression}
+        <div className="absolute top-10 right-10 bg-red-900/80 text-xs px-2 py-1 rounded text-white border border-red-500">
+          State: {expression}
         </div>
-      )}
+      )} 
+      */}
     </div>
   );
 };
