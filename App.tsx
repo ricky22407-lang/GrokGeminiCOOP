@@ -12,22 +12,22 @@ const DOCS = {
   world: {
     title: 'World Setting',
     icon: <Map />,
-    content: `# 世界觀：艾瑞西亞\n\n- **聖光都城**: 虛偽的信仰中心\n- **永恆尖塔**: 主角的魔王城\n- **精靈之森**: 傲慢的古老種族\n\n核心力量：支配值 (Dominance) vs 意志力 (Willpower)`
+    content: `# 世界觀設定\n\n大陸名：埃爾多蘭（Eldoran）\n\n表面秩序：\n- 多個種族城邦割據：人類王國、精靈森域、獸人部落、矮人堡壘、異形地下城。\n- 存在虛偽的聯盟、貿易、信仰體系。\n\n王座的本質：\n- 擁有「裁定權」：能重寫規則、標記歸屬、剝奪反抗者的意志力。\n- 目標：讓「被支配」成為最合理的選擇。世界不會被摧毀，只會被重塑為跪姿。\n\n主角視角：\n- 世界是棋盤，所有人都是可被標記的棋子。\n- 支配即效率。`
   },
   char: {
     title: 'Characters',
     icon: <FileText />,
-    content: `# 角色設定\n\n1. **塞拉斯蒂亞 (聖女)**: 墮落/背德\n2. **艾琳諾 (精靈女王)**: 傲慢粉碎\n3. **瓦爾基里 (女將軍)**: 雌犬化\n4. **薇薇安 (法師)**: 知識換身體\n5. **娜蒂亞 (刺客)**: 依賴/所有物化`
+    content: `# 五位女主角詳細設定\n\n1. **薇爾緹 (Velti)** - 王座近侍\n   - 絕對忠誠，渴求命令。\n   - H定位：主動跪下，要求精液標記作為誓約。\n\n2. **塞蕾娜 (Serena)** - 策略顧問\n   - 理性交易，掌控感逆轉。\n   - H定位：理性崩潰，承認最優解是徹底屬於主角。\n\n3. **艾莉婭 (Elia)** - 宗教代表\n   - 信仰崩塌與重塑。\n   - H定位：視精液為聖水，自我消解式性愛。\n\n4. **卡米拉 (Camilla)** - 前敵對者\n   - 高傲戰士，自尊粉碎。\n   - H定位：強制高潮，乞求懲罰與內射。\n\n5. **莉絲 (Lys)** - 情報/刺客\n   - 扭曲依附，錯位救贖。\n   - H定位：瘋狂騎乘，尋求精液平息瘋狂。`
   },
   flow: {
     title: 'Story Flow',
     icon: <GitBranch />,
-    content: `# 故事流程\n\n序章 -> 實力檢測 -> 路線選擇 (教會/王國/森林) -> H事件/調教 -> 結局分支\n\n最終結局: 絕對支配 (True End)`
+    content: `# 故事流程\n\n主線三階段：\n1. **觀察期**：世界描述，主角冷靜觀察。\n2. **靠近期**：合作/衝突，女角產生渴求。\n3. **歸屬期**：H場景集中，身分轉換完成。\n\n支線系統：\n- 外族征戰 (儀式化交合)\n- 心靈統治 (完全歸屬)\n- 制度重寫 (公開儀式)`
   },
   check: {
     title: 'Checklist',
     icon: <CheckSquare />,
-    content: `# Phase 1 Checklist\n\n[x] World Setting\n[x] Character Profiles\n[x] Story Flowchart\n[x] README Setup\n\nReady for Phase 2: Prototype`
+    content: `# Phase 1 檢核表\n\n[x] 世界觀文檔完成 (埃爾多蘭)\n[x] 五女主角詳細設定 (含H語線)\n[x] 故事流程圖 (主線+支線)\n[x] 符合七條鐵律\n\n下一步：Phase 2 文本期`
   }
 };
 
@@ -60,7 +60,7 @@ const App: React.FC = () => {
 
         <div className="mt-auto pt-8 text-xs text-gray-600">
           Phase 1: Planning<br/>
-          Status: <span className="text-green-500">Active</span>
+          Status: <span className="text-green-500">Complete</span>
         </div>
       </aside>
 

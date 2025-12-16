@@ -1,32 +1,19 @@
-# 故事流程圖
+# 故事流程圖（Mermaid 語法）
 
 ```mermaid
 graph TD
-    Start[序章：王座甦醒] --> Check[實力檢測與教學關]
-    Check --> RouteSelection{選擇征服路線}
-    
-    %% 聖女路線
-    RouteSelection -->|攻打教會| StLumina[聖光都城淪陷]
-    StLumina --> EventCelestia1[事件：玷污的神像]
-    EventCelestia1 --> ChoiceCelestia{處置聖女}
-    ChoiceCelestia -->|公開羞辱| PathA1[結局：墮落聖女的傳教]
-    ChoiceCelestia -->|密室調教| PathA2[結局：專屬的聖杯]
+    A[開始：觀察期] --> B[世界描述 + 女主角初登場<br>主角冷靜觀察，幾乎無親密]
+    B --> C[靠近期：合作/衝突/試探<br>女主角情緒偏移，開始產生渴求]
+    C --> D[歸屬期：身分轉換完成<br>H場景集中，心理宣告歸屬]
+    D --> E[個人主線結束：女主角徹底標記]
 
-    %% 將軍路線
-    RouteSelection -->|擊潰王國軍| BattleField[戰場之舞]
-    BattleField --> EventValkyrie1[事件：敗北的騎士]
-    EventValkyrie1 --> ChoiceValkyrie{處置將軍}
-    ChoiceValkyrie -->|剝奪武裝| PathB1[結局：王座下的看門犬]
-    ChoiceValkyrie -->|賜予魔血| PathB2[結局：深淵龍騎士]
+    subgraph 支線系統
+        F[支線A：外族征戰] --> G[女代表戰敗 → 心理屈服 → 獻上族群<br>H：儀式化交合宣告新秩序]
+        H[支線B：心靈統治] --> I[女王主動庇護 → 私人交易 → 完全歸屬<br>H：多次內射標記]
+        J[支線C：制度重寫] --> K[改變婚姻/文化 → 女角成為象徵<br>H：公開儀式性交]
+    end
 
-    %% 精靈路線
-    RouteSelection -->|燒毀森林| ForestFire[燃燒的結界]
-    ForestFire --> EventElysia1[事件：女王的求饒]
-    EventElysia1 --> ChoiceElysia{處置女王}
-    ChoiceElysia -->|拍賣會| PathC1[結局：高貴的商品]
-    ChoiceElysia -->|作為苗床| PathC2[結局：繁衍的母體]
-
-    %% 共通線收束
-    PathA1 & PathA2 & PathB1 & PathB2 & PathC1 & PathC2 --> GrandFinale[終章：絕對支配]
-    GrandFinale --> TrueEnd[True End: The Silent King]
+    A --> F
+    A --> H
+    A --> J
 ```

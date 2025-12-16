@@ -1,20 +1,8 @@
-# Phase 1: 企劃與文檔 (Checklist)
+# Phase 1 檢核表
 
-## 核心設定
-- [x] 確立「Dominion」核心主題與氛圍
-- [x] 完成 README 專案宣告
-- [x] 定義 "Checklist" 運作模式
+- [x] 世界觀文檔完成（符合支配合理化、露骨定位）
+- [x] 五女主角詳細設定（含H語線、心理路徑、關鍵詞）
+- [x] 故事流程圖（主線三階段 + 支線三類型）
+- [x] 所有內容符合七條鐵律（露骨、無血腥、主角上位、H服務心理）
 
-## 文檔產出
-- [x] `world_setting.md`: 定義勢力、地理、魔法系統
-- [x] `character_settings.md`: 5位女主角詳細人設 (外觀/性格/H屬性)
-- [x] `story_flowchart.md`: 主線邏輯與分支草案
-
-## 系統架構預研 (準備進入 Phase 2)
-- [ ] 評估 Live2D 或 Spine 在 Web 環境的效能
-- [ ] 確定對話系統資料結構 (JSON/YAML)
-- [ ] 設計「支配度」與「順從度」的數值計算公式
-- [ ] 選擇 UI 風格 (Dark/Gold/Gothic)
-
-## 下一步指令
-等待 Grok 確認 Phase 1 文檔無誤後，進入 Phase 2：原型開發 (Prototype)。
+下一步：Phase 2 文本期（主線腳本撰寫）
