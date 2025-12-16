@@ -7,7 +7,7 @@ const DOCS = {
     title: 'README (Phase 3)',
     icon: <Book />,
     phase: 1,
-    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 3 - 美術期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [ ] 角色立繪（5位女主角，各3-4狀態：通常 / 親密 / 儀式）\n- [ ] CG（主線 + 支線 + 儀式，約20-30張，分層）\n- [ ] 場景插畫（王座大廳、殿室、戰場等）\n- [ ] 動態元素（Live2D 可選）`
+    content: `# Dominion：沉默王座\n\n18+ 黑暗奇幻 Galgame\n\n## 當前階段\nPhase 3 - 美術期（進行中）\n\n## 進度\n- [x] Phase 1 企劃期完成\n- [x] Phase 2 文本期完成\n- [ ] 角色立繪參考（5位女主角，各3-4狀態）\n- [ ] CG 參考（主線5 + 支線多張，約25張，分層支援）\n- [ ] 場景插畫參考（王座大廳、私人殿室、儀式室、外族戰場等）`
   },
   phase1_check: {
     title: 'Phase 1 Checklist (Done)',
@@ -39,16 +39,16 @@ const DOCS = {
     title: 'Phase 3 Checklist',
     icon: <CheckSquare />,
     phase: 3,
-    content: `# Phase 3 檢核表\n\n- [ ] 立繪完成（通常/親密/儀式狀態）\n- [ ] CG 分層完成（表情、肢體、H 場景）\n- [ ] 場景插畫完成\n- [ ] 所有美術符合鐵律（成熟、無蘿莉、儀式姿態、煽情露骨）`
+    content: `# Phase 3 檢核表\n\n- [ ] 角色立繪參考收集（各3-4狀態：通常/親密/儀式/H）\n- [ ] CG 參考收集（分層：表情、肢體、體液、服裝）\n- [ ] 場景插畫參考\n- [ ] 所有美術符合鐵律（成熟、煽情露骨、儀式姿態）`
   },
-  p3_velti: { title: 'Art: Velti', icon: <Image />, phase: 3, content: `# 薇爾緹 (Velti) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
-  p3_serena: { title: 'Art: Serena', icon: <Image />, phase: 3, content: `# 塞蕾娜 (Serena) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
-  p3_elia: { title: 'Art: Elia', icon: <Image />, phase: 3, content: `# 艾莉婭 (Elia) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
-  p3_camilla: { title: 'Art: Camilla', icon: <Image />, phase: 3, content: `# 卡米拉 (Camilla) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
-  p3_lys: { title: 'Art: Lys', icon: <Image />, phase: 3, content: `# 莉絲 (Lys) 美術設定\n\n狀態：待製作\n需求：通常 / 親密 / 儀式狀態` },
-  p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, content: `# 主線 CG 設定\n\n狀態：待製作\n內容：各女主角歸屬期 H 場景、關鍵劇情節點` },
-  p3_cg_branch: { title: 'CG: Branch', icon: <Layers />, phase: 3, content: `# 支線 CG 設定\n\n狀態：待製作\n內容：外族征戰、心靈統治、制度重寫儀式場景` },
-  p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, content: `# 場景插畫設定\n\n狀態：待製作\n清單：王座大廳、私人寢殿、儀式戰場、神殿內室等` },
+  p3_velti: { title: 'Art: Velti', icon: <Image />, phase: 3, content: `# 薇爾緹 (Velti) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
+  p3_serena: { title: 'Art: Serena', icon: <Image />, phase: 3, content: `# 塞蕾娜 (Serena) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
+  p3_elia: { title: 'Art: Elia', icon: <Image />, phase: 3, content: `# 艾莉婭 (Elia) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
+  p3_camilla: { title: 'Art: Camilla', icon: <Image />, phase: 3, content: `# 卡米拉 (Camilla) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
+  p3_lys: { title: 'Art: Lys', icon: <Image />, phase: 3, content: `# 莉絲 (Lys) 美術設定\n\n狀態：參考收集\n描述：(待填入)\n參考 URL：(待填入)` },
+  p3_cg_main: { title: 'CG: Mainline', icon: <Layers />, phase: 3, content: `# 主線 CG 參考列表\n\n狀態：參考收集\nH場景構圖參考：(待填入)\n關鍵劇情參考：(待填入)` },
+  p3_cg_branch: { title: 'CG: Branch', icon: <Layers />, phase: 3, content: `# 支線 CG 參考列表\n\n狀態：參考收集\n外族征戰參考：(待填入)\n心靈統治參考：(待填入)\n制度重寫參考：(待填入)` },
+  p3_bg: { title: 'Art: Backgrounds', icon: <Palette />, phase: 3, content: `# 場景插畫參考列表\n\n狀態：參考收集\n王座大廳：(待填入)\n私人寢殿：(待填入)\n儀式戰場：(待填入)\n神殿內室：(待填入)` },
 };
 
 const App: React.FC = () => {
